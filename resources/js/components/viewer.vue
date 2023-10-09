@@ -56,9 +56,11 @@
                         </thead>
                         <tbody>
                         <tr v-for="(row, index) in resource.data" :key="index">
-                            <td class="whitespace-nowrap" style="width: 1%;">{{ row.date }}</td>
-                            <td class="whitespace-nowrap" style="width: 1%;">
-                                <div class="flex items-center space-x-2">
+                            <td class="whitespace-nowrap align-top" style="width: 1%;">
+                                <div class="flex items-center h-10">{{ row.date }}</div>
+                            </td>
+                            <td class="whitespace-nowrap align-top" style="width: 1%;">
+                                <div class="flex items-center h-10 space-x-2">
                                     <avatar class="w-8 h-8" :user="row.user"></avatar>
                                     <div v-if="userFullDetails">
                                         <div>{{ row.user.name }}</div>
@@ -66,8 +68,10 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="whitespace-nowrap" style="width: 1%;">{{ row.type }}</td>
-                            <td>
+                            <td class="whitespace-nowrap align-top" style="width: 1%;">
+                                <div class="flex items-center h-10">{{ row.type }}</div>
+                            </td>
+                            <td class=" align-top">
                                 <div v-html="row.detail"></div>
                             </td>
                         </tr>
