@@ -1,2 +1,6 @@
-<div>{{ $handler->action($event) }} '{{ $data->name }}' in the '{{ $data->taxonomy->name }}' Taxonomy</div>
-<div class="text-xs text-gray-500">ID: {{ $data->id }}</div>
+<div>{{ __('statamic-logger::listeners.term', [
+    'action' => $handler->action($event),
+    'name' => $data->name,
+    'taxonomy_name' => $data->taxonomy->name
+]) }}</div>
+<div class="text-xs text-gray-500">{{ __('statamic-logger::listeners.id') }}: {{ $data->id }}</div>

@@ -1,2 +1,6 @@
-<div>{{ $handler->action($event) }} '{{ $data->name }}' Entry order in the '{{ $data->site }}' Site</div>
-<div class="text-xs text-gray-500">ID: {{ $data->id }}</div>
+<div>{{ __('statamic-logger::listeners.collection_tree', [
+    'action' => $handler->action($event),
+    'name' => $data->name,
+    'site' => $data->site
+]) }}</div>
+<div class="text-xs text-gray-500">{{ __('statamic-logger::listeners.id') }}: {{ $data->id }}</div>
