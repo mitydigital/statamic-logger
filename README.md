@@ -9,7 +9,7 @@
 
 <!-- /statamic:hide -->
 
-> Adds detailed, customisable and human-friendly logging support for Statamic
+> Detailed, customisable and human-friendly logging for Statamic
 
 ## Logger for Statamic is a Commercial Addon.
 
