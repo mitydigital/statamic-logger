@@ -5,4 +5,6 @@ return [
     'nav_title' => 'Logger',
 
     'description' => 'View daily action log files.',
+
+    'raw' => 'Raw message',
 ];

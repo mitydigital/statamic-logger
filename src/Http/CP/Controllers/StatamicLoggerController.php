@@ -20,6 +20,9 @@ class StatamicLoggerController extends Controller
                 'dates' => $reader->getDates(),
             ]);
         }
+        if ($request->get('raw', false) === true || $request->get('raw', false) === 'true') {
+            LogResource::includeRawMessage(true);
+        }
 
         // return json
         return new LengthAwarePaginator(

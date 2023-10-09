@@ -30,6 +30,13 @@
                     />
                     Show full user details?
                 </label>
+
+                <label>
+                    <input type="checkbox"
+                           v-model="raw"
+                    />
+                    Show raw message?
+                </label>
             </div>
 
         </header>
@@ -112,6 +119,8 @@ export default {
             page: 1,
             perPage: 25,
 
+            raw: false,
+
             resource: null,
 
             userFullDetails: false,
@@ -133,12 +142,18 @@ export default {
             if (this.$data._source) this.$data._source.cancel();
             this.$data._source = this.$axios.CancelToken.source();
 
+            let params = {
+                date: this.date,
+                page: this.page,
+                perPage: this.perPage
+            };
+
+            if (this.raw) {
+                params.raw = true;
+            }
+
             this.$axios.get(this.requestUrl, {
-                params: {
-                    date: this.date,
-                    page: this.page,
-                    perPage: this.perPage
-                },
+                params: params,
                 cancelToken: this.$data._source.token
             }).then(response => {
                 this.resource = response.data;
@@ -183,6 +198,11 @@ export default {
 
                 // load
                 this.request();
+            }
+        },
+        raw(newRaw, oldRaw) {
+            if (newRaw != oldRaw) {
+                this.request()
             }
         }
     }

@@ -43,7 +43,8 @@
     "orchestra/testbench": "^8.5",
     "laravel/pint": "^1.10",
     "spatie/pest-plugin-test-time": "^2.0",
-    "pestphp/pest-plugin-laravel": "^2.1"
+    "pestphp/pest-plugin-laravel": "^2.1",
+    "spatie/x-ray": "^1.1"
   },
   "scripts": {
     "pint": [

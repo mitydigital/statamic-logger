@@ -12,6 +12,8 @@ use Statamic\Facades\User;
 
 class LogResource extends JsonResource
 {
+    protected static bool $includeRawMessage = false;
+
     protected string $pattern = "/^\[(?<datetime>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\] (?<env>\w+)\.(?<level>\w+): (?<message>.*)/m";
 
     protected function parseLog(): ?array
@@ -41,6 +43,8 @@ class LogResource extends JsonResource
         $view = null;
         $type = null;
         $viewData = [];
+
+        $debug = '';
 
         $user = [];
         if (! $message) {
@@ -97,6 +101,13 @@ class LogResource extends JsonResource
                 ];
 
             }
+
+            //
+            // raw message
+            //
+            if (LogResource::$includeRawMessage) {
+                $debug = view('statamic-logger::raw', ['data' => $message->data])->render();
+            }
         }
 
         //
@@ -118,7 +129,7 @@ class LogResource extends JsonResource
             'date' => $matches['datetime'],
             'user' => $user,
             'type' => $type,
-            'detail' => $render,
+            'detail' => $render.$debug,
         ];
     }
 
@@ -138,5 +149,10 @@ class LogResource extends JsonResource
         }
 
         return null; // this far, we fail
+    }
+
+    public static function includeRawMessage(bool $include)
+    {
+        LogResource::$includeRawMessage = $include;
     }
 }

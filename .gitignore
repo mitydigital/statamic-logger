@@ -10,6 +10,9 @@ composer.lock
 .php_cs.cache
 .idea
 
+resources/dist/hot
+
+tests/TestSupport
 tests/__fixtures__/blueprints/*.yaml
 tests/__fixtures__/users/*.yaml
 .env
