@@ -8,35 +8,36 @@
                 <h1 class="flex-1" v-text="title"/>
             </div>
 
-            <div class="mt-6 flex items-center space-x-3">
-                <div>
-                    <select-input
-                        v-model="date"
-                        :placeholder="false"
-                        :options="dateOptions"/>
+            <div class="mt-6 sm:flex items-center sm:space-x-3">
+                <div class="flex items-center space-x-3">
+                    <div>
+                        <select-input
+                            v-model="date"
+                            :placeholder="false"
+                            :options="dateOptions"/>
+                    </div>
+
+                    <a :class="{
+                           'pointer-events-none opacity-50 disabled': !date
+                       }"
+                       :href="download"
+                       class="btn"
+                       target="_blank">
+                        Download
+                    </a>
                 </div>
 
-                <a :class="{
-                       'pointer-events-none opacity-50 disabled': !date
-                   }"
-                   :href="download"
-                   class="btn"
-                   target="_blank">Download
-                </a>
+                <div class="py-2 flex items-center space-x-4">
+                    <label>
+                        <input type="checkbox" v-model="userFullDetails"/>
+                        Show full user details?
+                    </label>
 
-                <label>
-                    <input type="checkbox"
-                           v-model="userFullDetails"
-                    />
-                    Show full user details?
-                </label>
-
-                <label>
-                    <input type="checkbox"
-                           v-model="raw"
-                    />
-                    Show raw message?
-                </label>
+                    <label>
+                        <input type="checkbox" v-model="raw"/>
+                        Show raw message?
+                    </label>
+                </div>
             </div>
 
         </header>
