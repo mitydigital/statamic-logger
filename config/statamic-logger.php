@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'enabled' => env('LOGGER_ENABLED', true),
+    'enabled' => env('LOGGER_FOR_STATAMIC_ENABLED', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -57,7 +57,7 @@ return [
         |
         */
 
-        'path' => env('LOGGER_STORAGE_PATH', null),
+        'path' => env('LOGGER_FOR_STATAMIC_STORAGE_PATH', null),
 
         /*
         |--------------------------------------------------------------------------
@@ -69,7 +69,7 @@ return [
         |
         */
 
-        'name' => env('LOGGER_STORAGE_NAME', 'statamic-logger'),
+        'name' => env('LOGGER_FOR_STATAMIC_STORAGE_NAME', 'statamic-logger'),
 
         /*
         |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ return [
         |
         */
 
-        'retention' => env('LOGGER_STORAGE_RETENTION_DAYS', 7),
+        'retention' => env('LOGGER_FOR_STATAMIC_STORAGE_RETENTION_DAYS', 7),
 
     ],
 ];
