@@ -2,11 +2,11 @@
 
 namespace MityDigital\StatamicLogger\Listeners;
 
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\UserGroupDeleted;
 use Statamic\Events\UserGroupSaved;
 
-class UserGroup extends EventHandler
+class UserGroup extends EventListener
 {
     public function view(): string
     {

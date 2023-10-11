@@ -2,12 +2,12 @@
 
 namespace MityDigital\StatamicLogger\Listeners;
 
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\TaxonomyCreated;
 use Statamic\Events\TaxonomyDeleted;
 use Statamic\Events\TaxonomySaved;
 
-class Taxonomy extends EventHandler
+class Taxonomy extends EventListener
 {
     public function view(): string
     {

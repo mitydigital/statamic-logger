@@ -6,12 +6,12 @@ use Illuminate\Auth\Events\Failed as AuthFailed;
 use Illuminate\Auth\Events\Login as AuthLogin;
 use Illuminate\Auth\Events\Logout as AuthLogout;
 use Illuminate\Auth\Events\PasswordReset as AuthPasswordReset;
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\UserCreated;
 use Statamic\Events\UserDeleted;
 use Statamic\Events\UserSaved;
 
-class User extends EventHandler
+class User extends EventListener
 {
     public function view(): string
     {

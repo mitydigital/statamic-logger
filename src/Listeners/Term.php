@@ -2,12 +2,12 @@
 
 namespace MityDigital\StatamicLogger\Listeners;
 
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\TermCreated;
 use Statamic\Events\TermDeleted;
 use Statamic\Events\TermSaved;
 
-class Term extends EventHandler
+class Term extends EventListener
 {
     public function view(): string
     {

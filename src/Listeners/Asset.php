@@ -2,14 +2,14 @@
 
 namespace MityDigital\StatamicLogger\Listeners;
 
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\AssetDeleted;
 use Statamic\Events\AssetReplaced;
 use Statamic\Events\AssetReuploaded;
 use Statamic\Events\AssetSaved;
 use Statamic\Events\AssetUploaded;
 
-class Asset extends EventHandler
+class Asset extends EventListener
 {
     public function view(): string
     {

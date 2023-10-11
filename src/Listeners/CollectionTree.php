@@ -2,11 +2,11 @@
 
 namespace MityDigital\StatamicLogger\Listeners;
 
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\CollectionTreeDeleted;
 use Statamic\Events\CollectionTreeSaved;
 
-class CollectionTree extends EventHandler
+class CollectionTree extends EventListener
 {
     public function view(): string
     {

@@ -2,11 +2,11 @@
 
 namespace MityDigital\StatamicLogger\Listeners;
 
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\RoleDeleted;
 use Statamic\Events\RoleSaved;
 
-class Role extends EventHandler
+class Role extends EventListener
 {
     public function view(): string
     {

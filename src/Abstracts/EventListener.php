@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use UnhandledMatchError;
 
-abstract class EventHandler
+abstract class EventListener
 {
     public function handle(mixed $event): void
     {

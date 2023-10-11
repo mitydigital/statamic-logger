@@ -6,7 +6,7 @@ use Illuminate\Auth\Events\Logout as AuthLogout;
 use Illuminate\Auth\Events\PasswordReset as AuthPasswordReset;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Events\Dispatcher;
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use MityDigital\StatamicLogger\Listeners\Entry;
 use MityDigital\StatamicLogger\Subscribers\StatamicLoggerEventSubscriber;
@@ -145,7 +145,7 @@ it('can add additional events', function () {
     expect($this->events)->not()->toHaveKey(Verified::class);
 
     // build the handler
-    $handler = new class extends EventHandler
+    $handler = new class extends EventListener
     {
         protected function data($event): array
         {

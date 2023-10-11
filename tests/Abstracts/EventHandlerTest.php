@@ -2,14 +2,14 @@
 
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Log;
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use Statamic\Facades\User;
 
 use function Pest\Laravel\actingAs;
 
 it('has the public handle method which calls the log method', function () {
-    expect(collect((new ReflectionClass(EventHandler::class))
+    expect(collect((new ReflectionClass(EventListener::class))
         ->getMethods(ReflectionMethod::IS_PUBLIC))
         ->pluck('name')
         ->search('handle'))
@@ -17,7 +17,7 @@ it('has the public handle method which calls the log method', function () {
 });
 
 it('has the protected build log entry method', function () {
-    expect(collect((new ReflectionClass(EventHandler::class))
+    expect(collect((new ReflectionClass(EventListener::class))
         ->getMethods(ReflectionMethod::IS_PROTECTED))
         ->pluck('name')
         ->search('buildLogEntry'))
@@ -35,7 +35,7 @@ it('returns the expected log structure from the build log entry method', functio
     $event = new Verified('user');
 
     // build a custom handler
-    $handler = new class extends EventHandler
+    $handler = new class extends EventListener
     {
         protected function data($event): array
         {
@@ -97,7 +97,7 @@ it('returns the handlers data in the build log entry method', function () {
     $event = new Verified('user');
 
     // build a custom handler
-    $handler = new class extends EventHandler
+    $handler = new class extends EventListener
     {
         protected function data($event): array
         {
@@ -132,7 +132,7 @@ it('supplements additional data in the build log entry method', function () {
     $event = new Verified('user');
 
     // build a custom handler
-    $handler = new class extends EventHandler
+    $handler = new class extends EventListener
     {
         protected function data($event): array
         {
@@ -185,7 +185,7 @@ it('writes to the log with the handle method', function () {
     // fake a verified event (laravel auth)
     $event = new Verified('user');
 
-    $handler = new class extends EventHandler
+    $handler = new class extends EventListener
     {
         protected function data($event): array
         {
@@ -206,7 +206,7 @@ it('writes to the log with the handle method', function () {
 });
 
 it('defines data as an abstract method', function () {
-    expect(collect((new ReflectionClass(EventHandler::class))
+    expect(collect((new ReflectionClass(EventListener::class))
         ->getMethods(ReflectionMethod::IS_ABSTRACT))
         ->pluck('name')
         ->search('data'))
@@ -214,7 +214,7 @@ it('defines data as an abstract method', function () {
 });
 
 it('defines view as an abstract method', function () {
-    expect(collect((new ReflectionClass(EventHandler::class))
+    expect(collect((new ReflectionClass(EventListener::class))
         ->getMethods(ReflectionMethod::IS_ABSTRACT))
         ->pluck('name')
         ->search('view'))

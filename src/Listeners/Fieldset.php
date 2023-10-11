@@ -2,12 +2,12 @@
 
 namespace MityDigital\StatamicLogger\Listeners;
 
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\FieldsetCreated;
 use Statamic\Events\FieldsetDeleted;
 use Statamic\Events\FieldsetSaved;
 
-class Fieldset extends EventHandler
+class Fieldset extends EventListener
 {
     public function view(): string
     {

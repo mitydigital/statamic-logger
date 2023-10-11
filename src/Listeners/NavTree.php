@@ -2,11 +2,11 @@
 
 namespace MityDigital\StatamicLogger\Listeners;
 
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
 
-class NavTree extends EventHandler
+class NavTree extends EventListener
 {
     public function view(): string
     {

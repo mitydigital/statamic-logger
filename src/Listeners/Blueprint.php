@@ -2,12 +2,12 @@
 
 namespace MityDigital\StatamicLogger\Listeners;
 
-use MityDigital\StatamicLogger\Abstracts\EventHandler;
+use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\BlueprintCreated;
 use Statamic\Events\BlueprintDeleted;
 use Statamic\Events\BlueprintSaved;
 
-class Blueprint extends EventHandler
+class Blueprint extends EventListener
 {
     public function view(): string
     {
