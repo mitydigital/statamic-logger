@@ -74,10 +74,10 @@ abstract class EventListener
             return $this->verb($this->actionEvent);
         } catch (UnhandledMatchError $e) {
             // if there is no event, return the listener
-            if (!$this->actionEvent) {
+            if (! $this->actionEvent) {
                 return get_class($this);
             }
-            
+
             return $this->actionEvent; // return the event by default
         }
     }

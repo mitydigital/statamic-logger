@@ -2,7 +2,6 @@
 
 namespace MityDigital\StatamicLogger\Support;
 
-class StatamicLoggerEntry
+class Entry
 {
-
 }
