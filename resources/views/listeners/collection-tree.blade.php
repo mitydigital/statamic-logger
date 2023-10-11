@@ -1,5 +1,5 @@
 <div>{{ __('statamic-logger::listeners.collection_tree', [
-    'action' => $handler->action($event),
+    'action' => $handler->action(),
     'name' => $data->name,
     'site' => $data->site
 ]) }}</div>

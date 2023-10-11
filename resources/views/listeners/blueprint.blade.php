@@ -1,5 +1,5 @@
 <div>{{ __('statamic-logger::listeners.blueprint', [
-    'action' => $handler->action($event),
+    'action' => $handler->action(),
     'name' => $data->name,
     'namespace' => $data->namespace
 ]) }}</div>

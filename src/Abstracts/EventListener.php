@@ -9,6 +9,8 @@ use UnhandledMatchError;
 
 abstract class EventListener
 {
+    protected string $actionEvent;
+
     public function handle(mixed $event): void
     {
         Log::channel('statamic-logger')
@@ -65,15 +67,24 @@ abstract class EventListener
         return $handler;
     }
 
-    public function action(mixed $event): string
+    public function action(): string
     {
         try {
             // if we have a verb, get it
-            return $this->verb($event);
+            return $this->verb($this->actionEvent);
         } catch (UnhandledMatchError $e) {
-            // otherwise, return the event
-            return $event; // return the event by default
+            // if there is no event, return the listener
+            if (!$this->actionEvent) {
+                return get_class($this);
+            }
+            
+            return $this->actionEvent; // return the event by default
         }
+    }
+
+    public function setActionEvent(mixed $event): void
+    {
+        $this->actionEvent = $event;
     }
 
     abstract protected function verb(mixed $event): string;

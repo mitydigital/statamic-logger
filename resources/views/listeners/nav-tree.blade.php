@@ -1,5 +1,5 @@
 <div>{{ __('statamic-logger::listeners.nav_tree', [
-    'action' => $handler->action($event),
+    'action' => $handler->action(),
     'id' => $data->id,
     'site' => $data->site
 ]) }}</div>
