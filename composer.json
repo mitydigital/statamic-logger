@@ -1,6 +1,6 @@
 {
   "name": "mitydigital/statamic-logger",
-  "description": "Advanced logging for Statamic.",
+  "description": "Detailed, customisable and human-friendly logging for Statamic.",
   "type": "statamic-addon",
   "keywords": [
     "statamic",
@@ -30,7 +30,7 @@
   "extra": {
     "statamic": {
       "name": "Logger for Statamic",
-      "description": "Advanced logging for Statamic."
+      "description": "Detailed, customisable and human-friendly logging for Statamic."
     },
     "laravel": {
       "providers": [
