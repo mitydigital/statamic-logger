@@ -20,7 +20,7 @@ class LogResource extends JsonResource
     protected function parseLog(): ?array
     {
         // parse the line based on the monolog regex pattern
-        preg_match($this->pattern, $this->resource, $matches);
+        preg_match($this->pattern, trim($this->resource), $matches);
 
         foreach ($matches as $key => $value) {
             if (is_int($key)) {
@@ -34,7 +34,7 @@ class LogResource extends JsonResource
     public function toArray(Request $request): array
     {
         // parse the log
-        $matches = $this->parseLog($this->resource);
+        $matches = $this->parseLog();
 
         // decode the message
         $message = json_decode($matches['message']);
@@ -55,6 +55,7 @@ class LogResource extends JsonResource
                 'error' => __('statamic-logger::errors.invalid_json'),
                 'json' => $matches['message'],
             ];
+            dd($matches['message']);
         } else {
             //
             // get the handler

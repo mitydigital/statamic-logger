@@ -61,7 +61,7 @@ it('requires the download request to be in the correct format', function () {
 
     // success
     $this->get(route('statamic.cp.utilities.statamic-logger.download', [
-        'date' => '2023-10-09',
+        'date' => Carbon::now()->format('Y-m-d'),
     ]))
         ->assertStatus(200);
 });
