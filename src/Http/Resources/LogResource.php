@@ -2,10 +2,12 @@
 
 namespace MityDigital\StatamicLogger\Http\Resources;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\ViewException;
+use JsonSerializable;
 use MityDigital\StatamicLogger\Support\Entry;
 use Statamic\Auth\Eloquent\User as EloquentUser;
 use Statamic\Auth\File\User as FileUser;
@@ -17,21 +19,12 @@ class LogResource extends JsonResource
 
     protected string $pattern = "/^\[(?<datetime>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\] (?<env>\w+)\.(?<level>\w+): (?<message>.*)/m";
 
-    protected function parseLog(): ?array
+    public static function includeRawMessage(bool $include)
     {
-        // parse the line based on the monolog regex pattern
-        preg_match($this->pattern, trim($this->resource), $matches);
-
-        foreach ($matches as $key => $value) {
-            if (is_int($key)) {
-                unset($matches[$key]);
-            }
-        }
-
-        return $matches;
+        LogResource::$includeRawMessage = $include;
     }
 
-    public function toArray(Request $request): array
+    public function toArray(Request $request): array|Arrayable|JsonSerializable
     {
         // parse the log
         $matches = $this->parseLog();
@@ -55,7 +48,6 @@ class LogResource extends JsonResource
                 'error' => __('statamic-logger::errors.invalid_json'),
                 'json' => $matches['message'],
             ];
-            dd($matches['message']);
         } else {
             //
             // get the handler
@@ -147,6 +139,20 @@ class LogResource extends JsonResource
         ];
     }
 
+    protected function parseLog(): ?array
+    {
+        // parse the line based on the monolog regex pattern
+        preg_match($this->pattern, trim($this->resource), $matches);
+
+        foreach ($matches as $key => $value) {
+            if (is_int($key)) {
+                unset($matches[$key]);
+            }
+        }
+
+        return $matches;
+    }
+
     protected function getUserAvatar($user): ?string
     {
         // load avatar if we are a Statamic user
@@ -163,10 +169,5 @@ class LogResource extends JsonResource
         }
 
         return null; // this far, we fail
-    }
-
-    public static function includeRawMessage(bool $include)
-    {
-        LogResource::$includeRawMessage = $include;
     }
 }
