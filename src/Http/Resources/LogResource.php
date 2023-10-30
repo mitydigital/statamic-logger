@@ -24,7 +24,7 @@ class LogResource extends JsonResource
         LogResource::$includeRawMessage = $include;
     }
 
-    public function toArray(Request $request): array|Arrayable|JsonSerializable
+    public function toArray(Request $request)
     {
         // parse the log
         $matches = $this->parseLog();
