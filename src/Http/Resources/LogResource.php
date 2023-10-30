@@ -2,12 +2,9 @@
 
 namespace MityDigital\StatamicLogger\Http\Resources;
 
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\ViewException;
-use JsonSerializable;
 use MityDigital\StatamicLogger\Support\Entry;
 use Statamic\Auth\Eloquent\User as EloquentUser;
 use Statamic\Auth\File\User as FileUser;
@@ -24,7 +21,7 @@ class LogResource extends JsonResource
         LogResource::$includeRawMessage = $include;
     }
 
-    public function toArray(Request $request)
+    public function toArray($request)
     {
         // parse the log
         $matches = $this->parseLog();
