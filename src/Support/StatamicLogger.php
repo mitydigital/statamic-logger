@@ -60,11 +60,23 @@ class StatamicLogger
             $path = config('statamic-logger.storage.path');
         }
 
+        // if was set to null, force it back to logs
+        if (! $path) {
+            $path = 'logs';
+        }
+
         return $path;
     }
 
     public function getStorageFilename(): string
     {
-        return config('statamic-logger.storage.name', 'statamic-logger');
+        $filename = config('statamic-logger.storage.name', 'statamic-logger');
+
+        // if was set to null, force it to the default
+        if (! $filename) {
+            $filename = 'statamic-logger';
+        }
+
+        return $filename;
     }
 }
