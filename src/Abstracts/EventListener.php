@@ -2,12 +2,13 @@
 
 namespace MityDigital\StatamicLogger\Abstracts;
 
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Log;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use UnhandledMatchError;
 
-abstract class EventListener
+abstract class EventListener implements ShouldQueue
 {
     protected string $actionEvent;
 
@@ -82,10 +83,10 @@ abstract class EventListener
         }
     }
 
+    abstract protected function verb(mixed $event): string;
+
     public function setActionEvent(mixed $event): void
     {
         $this->actionEvent = $event;
     }
-
-    abstract protected function verb(mixed $event): string;
 }
