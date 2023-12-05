@@ -6,6 +6,7 @@ use Illuminate\Routing\Router;
 use MityDigital\StatamicLogger\Console\Commands\ListSubscribedEventsCommand;
 use MityDigital\StatamicLogger\Http\CP\Controllers\StatamicLoggerController;
 use MityDigital\StatamicLogger\Subscribers\StatamicLoggerEventSubscriber;
+use MityDigital\StatamicLogger\Support\LoggerFormatter;
 use MityDigital\StatamicLogger\Support\StatamicLogger;
 use Statamic\Facades\Utility;
 use Statamic\Providers\AddonServiceProvider;
@@ -99,6 +100,7 @@ class ServiceProvider extends AddonServiceProvider
                 'path' => storage_path($path.DIRECTORY_SEPARATOR.$filename),
                 'level' => 'debug',
                 'days' => config('statamic-logger.storage.retention', 7),
+                'tap' => [LoggerFormatter::class],
             ]);
         }
     }
