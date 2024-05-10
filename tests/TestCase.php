@@ -2,94 +2,22 @@
 
 namespace MityDigital\StatamicLogger\Tests;
 
-use Facades\Statamic\Version;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Facades\File;
 use MityDigital\StatamicLogger\ServiceProvider;
-use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Statamic\Console\Processes\Composer;
-use Statamic\Extend\Manifest;
-use Statamic\Providers\StatamicServiceProvider;
+use Statamic\Facades\Site;
 use Statamic\Statamic;
+use Statamic\Testing\AddonTestCase;
 
-abstract class TestCase extends OrchestraTestCase
+abstract class TestCase extends AddonTestCase
 {
     protected $shouldFakeVersion = true;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->withoutVite();
-
-        if ($this->shouldFakeVersion) {
-            Version::shouldReceive('get')
-                ->andReturn(Composer::create(__DIR__.'/../')->installedVersion(Statamic::PACKAGE));
-        }
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return [
-            StatamicServiceProvider::class,
-            ServiceProvider::class,
-        ];
-    }
-
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Statamic' => Statamic::class,
-        ];
-    }
+    protected string $addonServiceProvider = ServiceProvider::class;
 
     protected function getEnvironmentSetUp($app)
     {
         parent::getEnvironmentSetUp($app);
-
-        $app->make(Manifest::class)->manifest = [
-            'mitydigital/statamic-logger' => [
-                'id' => 'mitydigital/statamic-logger',
-                'namespace' => 'MityDigital\\StatamicLogger',
-            ],
-        ];
-    }
-
-    protected function resolveApplicationConfiguration($app)
-    {
-        parent::resolveApplicationConfiguration($app);
-
-        $configs = [
-            'assets',
-            'cp',
-            'forms',
-            'static_caching',
-            'sites',
-            'stache',
-            'system',
-            'users',
-        ];
-
-        foreach ($configs as $config) {
-            $app['config']->set(
-                "statamic.$config",
-                require(__DIR__."/../vendor/statamic/cms/config/{$config}.php")
-            );
-        }
-
-        $app['config']->set('app.key', 'base64:'.base64_encode(
-            Encrypter::generateKey($app['config']['app.cipher'])
-        ));
-
-        $app['config']->set('filesystems.disks.assets', [
-            'driver' => 'local',
-            'root' => $this->getTempDirectory('/content/assets'),
-            'url' => '/assets',
-            'visibility' => 'public',
-        ]);
-
-        $app['config']->set('auth.providers.users.driver', 'statamic');
-        $app['config']->set('statamic.users.repository', 'file');
 
         // assets and asset containers
         $app['config']->set('statamic.stache.stores.asset-containers.directory',
@@ -126,15 +54,62 @@ abstract class TestCase extends OrchestraTestCase
             $this->getTempDirectory('/content/users'));
     }
 
+    public function getTempDirectory($suffix = ''): string
+    {
+        return __DIR__.'/TestSupport/'.($suffix == '' ? '' : '/'.$suffix);
+    }
+
+    protected function resolveApplicationConfiguration($app)
+    {
+        parent::resolveApplicationConfiguration($app);
+
+        $configs = [
+            'assets',
+            'cp',
+            'forms',
+            'static_caching',
+            'stache',
+            'system',
+            'users',
+        ];
+
+        foreach ($configs as $config) {
+            $app['config']->set(
+                "statamic.$config",
+                require (__DIR__."/../vendor/statamic/cms/config/{$config}.php")
+            );
+        }
+
+        $app['config']->set('app.key', 'base64:'.base64_encode(
+            Encrypter::generateKey($app['config']['app.cipher'])
+        ));
+
+        $app['config']->set('filesystems.disks.assets', [
+            'driver' => 'local',
+            'root' => $this->getTempDirectory('/content/assets'),
+            'url' => '/assets',
+            'visibility' => 'public',
+        ]);
+
+        $app['config']->set('auth.providers.users.driver', 'statamic');
+        $app['config']->set('statamic.users.repository', 'file');
+
+        Statamic::booted(function () {
+            // configure to be an AU site
+            Site::setSites([
+                'default' => [
+                    'name' => config('app.name'),
+                    'locale' => 'en_AU',
+                    'url' => '/',
+                ],
+            ]);
+        });
+    }
+
     protected function tearDown(): void
     {
         File::deleteDirectory($this->getTempDirectory());
 
         parent::tearDown();
-    }
-
-    public function getTempDirectory($suffix = ''): string
-    {
-        return __DIR__.'/TestSupport/'.($suffix == '' ? '' : '/'.$suffix);
     }
 }

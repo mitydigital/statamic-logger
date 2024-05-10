@@ -142,6 +142,7 @@ it('can paginate a log', function () {
 it('returns the correct page after pagination', function () {
     // paginate, then getPage
     $this->reader->paginate($this->today, 2, 10);
+
     expect($this->reader->getPage())->toBe(2);
 
     $this->reader->paginate($this->today, 4, 10);

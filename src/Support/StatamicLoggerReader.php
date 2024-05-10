@@ -44,31 +44,6 @@ class StatamicLoggerReader
         return $logs->sortKeysDesc();
     }
 
-    protected function read(string $date): bool
-    {
-        // get the configured path and filename
-        $path = \MityDigital\StatamicLogger\Facades\StatamicLogger::getStoragePath();
-        $filename = \MityDigital\StatamicLogger\Facades\StatamicLogger::getStorageFilename();
-
-        // build the path
-        $fullPath = storage_path($path.DIRECTORY_SEPARATOR.$filename.'-'.$date.'.log');
-
-        // if the file doesn't exist, return false
-        if (! file_exists($fullPath)) {
-            return false;
-        }
-
-        // load the file
-        $this->file = new SplFileObject($fullPath);
-        $this->file->seek($this->file->getSize());
-
-        // set the total number of records
-        $this->total = $this->file->key();
-
-        // loaded and total found, return true
-        return true;
-    }
-
     public function paginate(string $date, int $page, int $perPage): array|Collection
     {
         // set the page and per page values
@@ -102,6 +77,31 @@ class StatamicLoggerReader
         }
 
         return $lines;
+    }
+
+    protected function read(string $date): bool
+    {
+        // get the configured path and filename
+        $path = \MityDigital\StatamicLogger\Facades\StatamicLogger::getStoragePath();
+        $filename = \MityDigital\StatamicLogger\Facades\StatamicLogger::getStorageFilename();
+
+        // build the path
+        $fullPath = storage_path($path.DIRECTORY_SEPARATOR.$filename.'-'.$date.'.log');
+
+        // if the file doesn't exist, return false
+        if (! file_exists($fullPath)) {
+            return false;
+        }
+
+        // load the file
+        $this->file = new SplFileObject($fullPath);
+        $this->file->seek($this->file->getSize());
+
+        // set the total number of records
+        $this->total = $this->file->key();
+
+        // loaded and total found, return true
+        return true;
     }
 
     public function getPage(): int
