@@ -23,7 +23,7 @@ abstract class EventListener implements ShouldQueue
     protected function buildLogEntry(mixed $event): array
     {
         // if we have a user, get their details
-        $user = auth()->user();
+        $user = $event->authenticatedUser;
         if ($user) {
             $user = [
                 'id' => $user->id,
