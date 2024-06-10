@@ -20,6 +20,10 @@ class User extends EventListener
 
     protected function data($event): array
     {
+        if (is_null($event->user)) {
+            return [];
+        }
+
         return [
             'id' => $event->user->id,
             'name' => $event->user->name(),
