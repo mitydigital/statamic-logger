@@ -46,3 +46,4 @@ help you. So be awesome - it'll feel fantastic.
 
 - [Marty Friedel](https://github.com/martyf)
 - [Jasper Jorna](https://github.com/jasperjorna) for the authenticated user update
+- [Jesse Koper](https://github.com/JesseKoper) for the User listener updates
