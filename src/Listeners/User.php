@@ -27,9 +27,16 @@ class User extends EventListener
             ];
         }
 
+        $name = $event->user->id;
+        if (method_exists($event->user, 'name')) {
+            $name = $event->user->name();
+        } elseif ($event->user->name) {
+            $name = $event->user->name;
+        }
+
         return [
             'id' => $event->user->id,
-            'name' => $event->user->name(),
+            'name' => $name,
         ];
     }
 
