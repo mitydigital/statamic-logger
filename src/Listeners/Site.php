@@ -16,8 +16,6 @@ class Site extends EventListener
 
     protected function data($event): array
     {
-        ray($event->site);
-
         return [
             'id' => $event->site->handle(),
             'name' => $event->site->name(),
