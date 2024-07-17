@@ -56,6 +56,7 @@ use Statamic\Events\UserCreated;
 use Statamic\Events\UserDeleted;
 use Statamic\Events\UserGroupDeleted;
 use Statamic\Events\UserGroupSaved;
+use Statamic\Events\UserPasswordChanged;
 use Statamic\Events\UserSaved;
 
 beforeEach(function () {
@@ -125,6 +126,8 @@ beforeEach(function () {
         UserCreated::class,
         UserDeleted::class,
         UserSaved::class,
+
+        UserPasswordChanged::class,
 
         UserGroupDeleted::class,
         UserGroupSaved::class,

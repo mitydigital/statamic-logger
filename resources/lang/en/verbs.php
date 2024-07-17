@@ -12,6 +12,7 @@ return [
     'logged_out' => 'Logged Out',
     'login_failed' => 'Attempted (but failed) to log in',
 
+    'password_changed' => 'Had their password changed',
     'password_reset' => 'Requested a password reset',
 
     'replaced' => 'Replaced',

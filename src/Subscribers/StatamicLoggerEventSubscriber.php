@@ -71,6 +71,7 @@ use Statamic\Events\UserCreated;
 use Statamic\Events\UserDeleted;
 use Statamic\Events\UserGroupDeleted;
 use Statamic\Events\UserGroupSaved;
+use Statamic\Events\UserPasswordChanged;
 use Statamic\Events\UserSaved;
 
 class StatamicLoggerEventSubscriber
@@ -149,6 +150,8 @@ class StatamicLoggerEventSubscriber
             UserCreated::class => User::class,
             UserDeleted::class => User::class,
             UserSaved::class => User::class,
+
+            UserPasswordChanged::class => User::class,
 
             UserGroupDeleted::class => UserGroup::class,
             UserGroupSaved::class => UserGroup::class,
