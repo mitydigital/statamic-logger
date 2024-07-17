@@ -21,6 +21,7 @@ use MityDigital\StatamicLogger\Listeners\Impersonation;
 use MityDigital\StatamicLogger\Listeners\Nav;
 use MityDigital\StatamicLogger\Listeners\NavTree;
 use MityDigital\StatamicLogger\Listeners\Role;
+use MityDigital\StatamicLogger\Listeners\Site;
 use MityDigital\StatamicLogger\Listeners\Taxonomy;
 use MityDigital\StatamicLogger\Listeners\Term;
 use MityDigital\StatamicLogger\Listeners\User;
@@ -61,6 +62,9 @@ use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
 use Statamic\Events\RoleDeleted;
 use Statamic\Events\RoleSaved;
+use Statamic\Events\SiteCreated;
+use Statamic\Events\SiteDeleted;
+use Statamic\Events\SiteSaved;
 use Statamic\Events\TaxonomyCreated;
 use Statamic\Events\TaxonomyDeleted;
 use Statamic\Events\TaxonomySaved;
@@ -138,6 +142,10 @@ class StatamicLoggerEventSubscriber
 
             RoleDeleted::class => Role::class,
             RoleSaved::class => Role::class,
+
+            SiteCreated::class => Site::class,
+            SiteDeleted::class => Site::class,
+            SiteSaved::class => Site::class,
 
             TaxonomyCreated::class => Taxonomy::class,
             TaxonomyDeleted::class => Taxonomy::class,

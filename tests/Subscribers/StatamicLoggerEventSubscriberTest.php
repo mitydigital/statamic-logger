@@ -46,6 +46,9 @@ use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
 use Statamic\Events\RoleDeleted;
 use Statamic\Events\RoleSaved;
+use Statamic\Events\SiteCreated;
+use Statamic\Events\SiteDeleted;
+use Statamic\Events\SiteSaved;
 use Statamic\Events\TaxonomyCreated;
 use Statamic\Events\TaxonomyDeleted;
 use Statamic\Events\TaxonomySaved;
@@ -114,6 +117,10 @@ beforeEach(function () {
 
         RoleDeleted::class,
         RoleSaved::class,
+
+        SiteCreated::class,
+        SiteDeleted::class,
+        SiteSaved::class,
 
         TaxonomyCreated::class,
         TaxonomyDeleted::class,
