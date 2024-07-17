@@ -2,6 +2,7 @@
 
 namespace MityDigital\StatamicLogger\Http\Resources;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\ViewException;
@@ -46,70 +47,80 @@ class LogResource extends JsonResource
                 'json' => $matches['message'],
             ];
         } else {
-            //
-            // get the handler
-            //
-            $handler = app()->make($message->handler);
+            try {
+                //
+                // get the handler
+                //
+                $handler = app()->make($message->handler);
 
-            //
-            // set the type
-            //
-            $type = $handler->type();
+                //
+                // set the type
+                //
+                $type = $handler->type();
 
-            //
-            // convert to a statamic logger entry
-            //
-            $entry = new Entry();
-            foreach ($message->data as $key => $value) {
-                $entry->$key = $value;
-            }
+                //
+                // convert to a statamic logger entry
+                //
+                $entry = new Entry();
+                foreach ($message->data as $key => $value) {
+                    $entry->$key = $value;
+                }
 
-            //
-            // render the message
-            //
-            if (View::exists($handler->view())) {
-                $view = $handler->view();
+                //
+                // render the message
+                //
+                if (View::exists($handler->view())) {
+                    $view = $handler->view();
 
-                // add the event to the handler (just makes it easier)
-                $handler->setActionEvent($message->event);
+                    // add the event to the handler (just makes it easier)
+                    $handler->setActionEvent($message->event);
 
-                $viewData = [
-                    'data' => $entry,
-                    'event' => $message->event,
-                    'handler' => $handler,
-                ];
-            } else {
-                // no view
+                    $viewData = [
+                        'data' => $entry,
+                        'event' => $message->event,
+                        'handler' => $handler,
+                    ];
+                } else {
+                    // no view
+                    $view = 'statamic-logger::error';
+                    $viewData = [
+                        'error' => __('statamic-logger::errors.view_not_found', [
+                            ':view' => $handler->view(),
+                            ':handler' => get_class($handler),
+                        ]),
+                        'json' => $matches['message'],
+                    ];
+                }
+
+                if ($message->user) {
+                    //
+                    // prepare the user
+                    //
+                    $user = [
+                        'id' => $message->user?->id,
+                        'name' => $message->user->name ?? null,
+                        'initials' => $message->user->name ? collect(explode(' ', $message->user->name))->map(fn (
+                            string $name
+                        ) => mb_substr($name, 0, 1))->join('') : null,
+                        'avatar' => $this->getUserAvatar($message->user),
+                    ];
+
+                }
+
+                //
+                // raw message
+                //
+                if (LogResource::$includeRawMessage) {
+                    $debug = view('statamic-logger::raw', ['data' => $entry])->render();
+                }
+            } catch (BindingResolutionException $e) {
                 $view = 'statamic-logger::error';
                 $viewData = [
-                    'error' => __('statamic-logger::errors.view_not_found', [
-                        ':view' => $handler->view(),
-                        ':handler' => get_class($handler),
+                    'error' => __('statamic-logger::errors.handler_not_found', [
+                        'handler' => $message->handler,
                     ]),
                     'json' => $matches['message'],
                 ];
-            }
-
-            if ($message->user) {
-                //
-                // prepare the user
-                //
-                $user = [
-                    'id' => $message->user?->id,
-                    'name' => $message->user->name ?? null,
-                    'initials' => $message->user->name ? collect(explode(' ', $message->user->name))->map(fn (
-                        string $name
-                    ) => mb_substr($name, 0, 1))->join('') : null,
-                    'avatar' => $this->getUserAvatar($message->user),
-                ];
-
-            }
-
-            //
-            // raw message
-            //
-            if (LogResource::$includeRawMessage) {
-                $debug = view('statamic-logger::raw', ['data' => $entry])->render();
             }
         }
 
