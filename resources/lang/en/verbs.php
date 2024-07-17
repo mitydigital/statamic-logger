@@ -5,6 +5,9 @@ return [
 
     'deleted' => 'Deleted',
 
+    'impersonation_started' => 'Started impersonating',
+    'impersonation_ended' => 'Ended impersonating',
+
     'logged_in' => 'Logged In',
     'logged_out' => 'Logged Out',
     'login_failed' => 'Attempted (but failed) to log in',

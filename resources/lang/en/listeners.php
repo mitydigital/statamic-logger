@@ -12,6 +12,9 @@ return [
 
     'entry' => ":action ':name' in the ':collection_name' Collection",
 
+    'impersonated' => 'Impersonated',
+    'impersonator' => 'Impersonator',
+
     'nav_tree' => ":action ':id' Nav order in the ':site' Site",
 
     'term' => ":action ':name' in the ':taxonomy_name' Taxonomy",

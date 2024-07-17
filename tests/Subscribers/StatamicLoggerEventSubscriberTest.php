@@ -38,6 +38,8 @@ use Statamic\Events\FormSaved;
 use Statamic\Events\GlobalSetCreated;
 use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
+use Statamic\Events\ImpersonationEnded;
+use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\NavDeleted;
 use Statamic\Events\NavSaved;
 use Statamic\Events\NavTreeDeleted;
@@ -99,6 +101,9 @@ beforeEach(function () {
         GlobalSetCreated::class,
         GlobalSetDeleted::class,
         GlobalSetSaved::class,
+
+        ImpersonationEnded::class,
+        ImpersonationStarted::class,
 
         NavDeleted::class,
         NavSaved::class,

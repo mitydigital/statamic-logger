@@ -17,6 +17,7 @@ use MityDigital\StatamicLogger\Listeners\Entry;
 use MityDigital\StatamicLogger\Listeners\Fieldset;
 use MityDigital\StatamicLogger\Listeners\Form;
 use MityDigital\StatamicLogger\Listeners\GlobalSet;
+use MityDigital\StatamicLogger\Listeners\Impersonation;
 use MityDigital\StatamicLogger\Listeners\Nav;
 use MityDigital\StatamicLogger\Listeners\NavTree;
 use MityDigital\StatamicLogger\Listeners\Role;
@@ -52,6 +53,8 @@ use Statamic\Events\FormSaved;
 use Statamic\Events\GlobalSetCreated;
 use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
+use Statamic\Events\ImpersonationEnded;
+use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\NavDeleted;
 use Statamic\Events\NavSaved;
 use Statamic\Events\NavTreeDeleted;
@@ -122,6 +125,9 @@ class StatamicLoggerEventSubscriber
             GlobalSetCreated::class => GlobalSet::class,
             GlobalSetDeleted::class => GlobalSet::class,
             GlobalSetSaved::class => GlobalSet::class,
+
+            ImpersonationEnded::class => Impersonation::class,
+            ImpersonationStarted::class => Impersonation::class,
 
             NavDeleted::class => Nav::class,
             NavSaved::class => Nav::class,
