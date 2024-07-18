@@ -23,7 +23,7 @@ abstract class EventListener implements ShouldQueue
     protected function buildLogEntry(mixed $event): array
     {
         // if we have a user, get their details
-        $user = $event->authenticatedUser ?? auth()->user();
+        $user = $this->getAuthenticatedUser($event);
         if ($user) {
             $user = [
                 'id' => $user->id,
@@ -45,6 +45,11 @@ abstract class EventListener implements ShouldQueue
             'user' => $user,
             'data' => $data,
         ];
+    }
+
+    protected function getAuthenticatedUser($event)
+    {
+        return $event->authenticatedUser ?? auth()->user();
     }
 
     abstract protected function data(mixed $event): array;

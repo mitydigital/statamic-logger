@@ -17,13 +17,16 @@ use MityDigital\StatamicLogger\Listeners\Entry;
 use MityDigital\StatamicLogger\Listeners\Fieldset;
 use MityDigital\StatamicLogger\Listeners\Form;
 use MityDigital\StatamicLogger\Listeners\GlobalSet;
+use MityDigital\StatamicLogger\Listeners\Impersonation;
 use MityDigital\StatamicLogger\Listeners\Nav;
 use MityDigital\StatamicLogger\Listeners\NavTree;
 use MityDigital\StatamicLogger\Listeners\Role;
+use MityDigital\StatamicLogger\Listeners\Site;
 use MityDigital\StatamicLogger\Listeners\Taxonomy;
 use MityDigital\StatamicLogger\Listeners\Term;
 use MityDigital\StatamicLogger\Listeners\User;
 use MityDigital\StatamicLogger\Listeners\UserGroup;
+use MityDigital\StatamicLogger\Listeners\Utility;
 use Statamic\Events\AssetContainerCreated;
 use Statamic\Events\AssetContainerDeleted;
 use Statamic\Events\AssetContainerSaved;
@@ -49,15 +52,27 @@ use Statamic\Events\FieldsetSaved;
 use Statamic\Events\FormCreated;
 use Statamic\Events\FormDeleted;
 use Statamic\Events\FormSaved;
+use Statamic\Events\GlideCacheCleared;
 use Statamic\Events\GlobalSetCreated;
 use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
+use Statamic\Events\ImpersonationEnded;
+use Statamic\Events\ImpersonationStarted;
+use Statamic\Events\LicenseSet;
+use Statamic\Events\LicensesRefreshed;
 use Statamic\Events\NavDeleted;
 use Statamic\Events\NavSaved;
 use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
 use Statamic\Events\RoleDeleted;
 use Statamic\Events\RoleSaved;
+use Statamic\Events\SearchIndexUpdated;
+use Statamic\Events\SiteCreated;
+use Statamic\Events\SiteDeleted;
+use Statamic\Events\SiteSaved;
+use Statamic\Events\StacheCleared;
+use Statamic\Events\StacheWarmed;
+use Statamic\Events\StaticCacheCleared;
 use Statamic\Events\TaxonomyCreated;
 use Statamic\Events\TaxonomyDeleted;
 use Statamic\Events\TaxonomySaved;
@@ -68,6 +83,7 @@ use Statamic\Events\UserCreated;
 use Statamic\Events\UserDeleted;
 use Statamic\Events\UserGroupDeleted;
 use Statamic\Events\UserGroupSaved;
+use Statamic\Events\UserPasswordChanged;
 use Statamic\Events\UserSaved;
 
 class StatamicLoggerEventSubscriber
@@ -119,9 +135,17 @@ class StatamicLoggerEventSubscriber
             FormDeleted::class => Form::class,
             FormSaved::class => Form::class,
 
+            GlideCacheCleared::class => Utility::class,
+
             GlobalSetCreated::class => GlobalSet::class,
             GlobalSetDeleted::class => GlobalSet::class,
             GlobalSetSaved::class => GlobalSet::class,
+
+            ImpersonationEnded::class => Impersonation::class,
+            ImpersonationStarted::class => Impersonation::class,
+
+            LicenseSet::class => Utility::class,
+            LicensesRefreshed::class => Utility::class,
 
             NavDeleted::class => Nav::class,
             NavSaved::class => Nav::class,
@@ -131,6 +155,17 @@ class StatamicLoggerEventSubscriber
 
             RoleDeleted::class => Role::class,
             RoleSaved::class => Role::class,
+
+            SearchIndexUpdated::class => Utility::class,
+
+            SiteCreated::class => Site::class,
+            SiteDeleted::class => Site::class,
+            SiteSaved::class => Site::class,
+
+            StacheCleared::class => Utility::class,
+            StacheWarmed::class => Utility::class,
+
+            StaticCacheCleared::class => Utility::class,
 
             TaxonomyCreated::class => Taxonomy::class,
             TaxonomyDeleted::class => Taxonomy::class,
@@ -143,6 +178,8 @@ class StatamicLoggerEventSubscriber
             UserCreated::class => User::class,
             UserDeleted::class => User::class,
             UserSaved::class => User::class,
+
+            UserPasswordChanged::class => User::class,
 
             UserGroupDeleted::class => UserGroup::class,
             UserGroupSaved::class => UserGroup::class,
