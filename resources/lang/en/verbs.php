@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'cleared' => 'Cleared',
     'created' => 'Created',
 
     'deleted' => 'Deleted',
@@ -15,10 +16,15 @@ return [
     'password_changed' => 'Had their password changed',
     'password_reset' => 'Requested a password reset',
 
+    'refreshed' => 'Refreshed',
     'replaced' => 'Replaced',
     'reuploaded' => 'Re-uploaded',
 
     'saved' => 'Saved',
+    'set' => 'Set',
 
+    'updated' => 'Updated',
     'uploaded' => 'Uploaded',
+
+    'warmed' => 'Warmed',
 ];

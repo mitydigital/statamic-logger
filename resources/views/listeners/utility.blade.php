@@ -1,0 +1,1 @@
+<div class="h-10 flex items-center">{{ $data->utility }} {{ strtolower($handler->action()) }}</div>

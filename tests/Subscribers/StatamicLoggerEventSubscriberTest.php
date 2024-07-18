@@ -35,20 +35,27 @@ use Statamic\Events\FieldsetSaved;
 use Statamic\Events\FormCreated;
 use Statamic\Events\FormDeleted;
 use Statamic\Events\FormSaved;
+use Statamic\Events\GlideCacheCleared;
 use Statamic\Events\GlobalSetCreated;
 use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
 use Statamic\Events\ImpersonationEnded;
 use Statamic\Events\ImpersonationStarted;
+use Statamic\Events\LicenseSet;
+use Statamic\Events\LicensesRefreshed;
 use Statamic\Events\NavDeleted;
 use Statamic\Events\NavSaved;
 use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
 use Statamic\Events\RoleDeleted;
 use Statamic\Events\RoleSaved;
+use Statamic\Events\SearchIndexUpdated;
 use Statamic\Events\SiteCreated;
 use Statamic\Events\SiteDeleted;
 use Statamic\Events\SiteSaved;
+use Statamic\Events\StacheCleared;
+use Statamic\Events\StacheWarmed;
+use Statamic\Events\StaticCacheCleared;
 use Statamic\Events\TaxonomyCreated;
 use Statamic\Events\TaxonomyDeleted;
 use Statamic\Events\TaxonomySaved;
@@ -102,12 +109,17 @@ beforeEach(function () {
         FormDeleted::class,
         FormSaved::class,
 
+        GlideCacheCleared::class,
+
         GlobalSetCreated::class,
         GlobalSetDeleted::class,
         GlobalSetSaved::class,
 
         ImpersonationEnded::class,
         ImpersonationStarted::class,
+
+        LicenseSet::class,
+        LicensesRefreshed::class,
 
         NavDeleted::class,
         NavSaved::class,
@@ -118,9 +130,16 @@ beforeEach(function () {
         RoleDeleted::class,
         RoleSaved::class,
 
+        SearchIndexUpdated::class,
+
         SiteCreated::class,
         SiteDeleted::class,
         SiteSaved::class,
+
+        StacheCleared::class,
+        StacheWarmed::class,
+
+        StaticCacheCleared::class,
 
         TaxonomyCreated::class,
         TaxonomyDeleted::class,
