@@ -60,8 +60,11 @@ use Statamic\Events\ImpersonationEnded;
 use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\LicenseSet;
 use Statamic\Events\LicensesRefreshed;
+use Statamic\Events\NavCreated;
+use Statamic\Events\NavCreating;
 use Statamic\Events\NavDeleted;
 use Statamic\Events\NavSaved;
+use Statamic\Events\NavSaving;
 use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
 use Statamic\Events\RoleDeleted;
@@ -147,8 +150,11 @@ class StatamicLoggerEventSubscriber
             LicenseSet::class => Utility::class,
             LicensesRefreshed::class => Utility::class,
 
+            NavCreated::class => Nav::class,
+            NavCreating::class => Nav::class,
             NavDeleted::class => Nav::class,
             NavSaved::class => Nav::class,
+            NavSaving::class => Nav::class,
 
             NavTreeDeleted::class => NavTree::class,
             NavTreeSaved::class => NavTree::class,
