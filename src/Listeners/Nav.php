@@ -3,8 +3,11 @@
 namespace MityDigital\StatamicLogger\Listeners;
 
 use MityDigital\StatamicLogger\Abstracts\EventListener;
+use Statamic\Events\NavCreated;
+use Statamic\Events\NavCreating;
 use Statamic\Events\NavDeleted;
 use Statamic\Events\NavSaved;
+use Statamic\Events\NavSaving;
 
 class Nav extends EventListener
 {
@@ -24,8 +27,11 @@ class Nav extends EventListener
     protected function verb($event): string
     {
         return match ($event) {
+            NavCreated::class => __('statamic-logger::verbs.created'),
+            NavCreating::class => __('statamic-logger::verbs.creating'),
             NavDeleted::class => __('statamic-logger::verbs.deleted'),
-            NavSaved::class => __('statamic-logger::verbs.saved')
+            NavSaved::class => __('statamic-logger::verbs.saved'),
+            NavSaving::class => __('statamic-logger::verbs.saving'),
         };
     }
 }

@@ -3,6 +3,7 @@
 return [
     'cleared' => 'Cleared',
     'created' => 'Created',
+    'creating' => 'Creating',
 
     'deleted' => 'Deleted',
 
@@ -21,6 +22,7 @@ return [
     'reuploaded' => 'Re-uploaded',
 
     'saved' => 'Saved',
+    'saving' => 'Saving',
     'set' => 'Set',
 
     'updated' => 'Updated',

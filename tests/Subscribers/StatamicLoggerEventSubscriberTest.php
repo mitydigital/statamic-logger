@@ -43,8 +43,11 @@ use Statamic\Events\ImpersonationEnded;
 use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\LicenseSet;
 use Statamic\Events\LicensesRefreshed;
+use Statamic\Events\NavCreated;
+use Statamic\Events\NavCreating;
 use Statamic\Events\NavDeleted;
 use Statamic\Events\NavSaved;
+use Statamic\Events\NavSaving;
 use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
 use Statamic\Events\RoleDeleted;
@@ -121,8 +124,11 @@ beforeEach(function () {
         LicenseSet::class,
         LicensesRefreshed::class,
 
+        NavCreated::class,
+        NavCreating::class,
         NavDeleted::class,
         NavSaved::class,
+        NavSaving::class,
 
         NavTreeDeleted::class,
         NavTreeSaved::class,
@@ -162,8 +168,8 @@ beforeEach(function () {
 
 it('tracks the correct events', function () {
 
-    $subscriber = new StatamicLoggerEventSubscriber();
-    $subscribed = $subscriber->subscribe(new Dispatcher());
+    $subscriber = new StatamicLoggerEventSubscriber;
+    $subscribed = $subscriber->subscribe(new Dispatcher);
 
     expect($subscribed)->toHaveCount(count($this->events));
 
@@ -200,8 +206,8 @@ it('can add additional events', function () {
     StatamicLogger::subscribe(Verified::class, $handler);
 
     // do we now have Verified in the list?
-    $subscriber = new StatamicLoggerEventSubscriber();
-    expect($subscriber->subscribe(new Dispatcher()))
+    $subscriber = new StatamicLoggerEventSubscriber;
+    expect($subscriber->subscribe(new Dispatcher))
         ->toHaveKey(Verified::class);
 });
 
@@ -210,22 +216,20 @@ it('can override existing events', function () {
     // make sure EntrySaved is meant to be there
     expect(EntrySaved::class)->toBeIn($this->events);
 
-    $subscriber = new StatamicLoggerEventSubscriber();
-    $subscribed = $subscriber->subscribe(new Dispatcher());
+    $subscriber = new StatamicLoggerEventSubscriber;
+    $subscribed = $subscriber->subscribe(new Dispatcher);
     expect($subscribed)->toHaveKey(EntrySaved::class)
         ->and($subscribed[EntrySaved::class])->toBe(Entry::class);
 
     // create a new handler that extends the existing Entry handler
     // build the handler
-    $handler = new class extends Entry
-    {
-    };
+    $handler = new class extends Entry {};
 
     StatamicLogger::subscribe(EntrySaved::class, $handler);
 
     // re-check
-    $subscriber = new StatamicLoggerEventSubscriber();
-    $subscribed = $subscriber->subscribe(new Dispatcher());
+    $subscriber = new StatamicLoggerEventSubscriber;
+    $subscribed = $subscriber->subscribe(new Dispatcher);
 
     expect($subscribed)->toHaveKey(EntrySaved::class)
         ->and($subscribed[EntrySaved::class])->toBe($handler);
@@ -233,14 +237,14 @@ it('can override existing events', function () {
 
 it('can remove existing events', function () {
     // get the subscriber
-    $subscriber = new StatamicLoggerEventSubscriber();
+    $subscriber = new StatamicLoggerEventSubscriber;
 
     // remove EntrySaved
     config()->set('statamic-logger.exclude', [
         EntrySaved::class,
     ]);
 
-    expect($subscriber->subscribe(new Dispatcher()))
+    expect($subscriber->subscribe(new Dispatcher))
         ->not()->toHaveKey(EntrySaved::class);
 });
 
@@ -248,12 +252,12 @@ it('subscribes to events when enabled only', function () {
     // disable
     config()->set('statamic-logger.enabled', false);
 
-    $subscriber = new StatamicLoggerEventSubscriber();
-    expect($subscriber->subscribe(new Dispatcher()))->toHaveCount(0);
+    $subscriber = new StatamicLoggerEventSubscriber;
+    expect($subscriber->subscribe(new Dispatcher))->toHaveCount(0);
 
     // enable
     config()->set('statamic-logger.enabled', true);
 
-    $subscriber = new StatamicLoggerEventSubscriber();
-    expect($subscriber->subscribe(new Dispatcher()))->not()->toHaveCount(0);
+    $subscriber = new StatamicLoggerEventSubscriber;
+    expect($subscriber->subscribe(new Dispatcher))->not()->toHaveCount(0);
 });
