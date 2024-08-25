@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="logger-viewer">
         <header class="mb-6">
 
             <breadcrumb :url="breadcrumbUrl" :title="__('Utilities')"/>
@@ -213,3 +213,8 @@ export default {
     }
 }
 </script>
+<style>
+#logger-viewer .space-x-4 > * + * {
+    margin-left: 1rem
+}
+</style>
