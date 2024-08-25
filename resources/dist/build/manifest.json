@@ -1,6 +1,13 @@
 {
+  "resources/js/cp.css": {
+    "file": "assets/cp-63069fba.css",
+    "src": "resources/js/cp.css"
+  },
   "resources/js/cp.js": {
-    "file": "assets/cp-1d1e672d.js",
+    "css": [
+      "assets/cp-63069fba.css"
+    ],
+    "file": "assets/cp-0b2ba955.js",
     "isEntry": true,
     "src": "resources/js/cp.js"
   }
