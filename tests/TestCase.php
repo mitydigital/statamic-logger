@@ -52,6 +52,10 @@ abstract class TestCase extends AddonTestCase
         // users
         $app['config']->set('statamic.stache.stores.users.directory',
             $this->getTempDirectory('/content/users'));
+
+        // forms submissions
+        $app['config']->set('statamic.stache.stores.form-submissions.directory',
+            $this->getTempDirectory('/content/submissions'));
     }
 
     public function getTempDirectory($suffix = ''): string

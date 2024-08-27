@@ -22,6 +22,7 @@ use MityDigital\StatamicLogger\Listeners\Nav;
 use MityDigital\StatamicLogger\Listeners\NavTree;
 use MityDigital\StatamicLogger\Listeners\Role;
 use MityDigital\StatamicLogger\Listeners\Site;
+use MityDigital\StatamicLogger\Listeners\Submission;
 use MityDigital\StatamicLogger\Listeners\Taxonomy;
 use MityDigital\StatamicLogger\Listeners\Term;
 use MityDigital\StatamicLogger\Listeners\User;
@@ -76,6 +77,11 @@ use Statamic\Events\SiteSaved;
 use Statamic\Events\StacheCleared;
 use Statamic\Events\StacheWarmed;
 use Statamic\Events\StaticCacheCleared;
+use Statamic\Events\SubmissionCreated;
+use Statamic\Events\SubmissionCreating;
+use Statamic\Events\SubmissionDeleted;
+use Statamic\Events\SubmissionSaved;
+use Statamic\Events\SubmissionSaving;
 use Statamic\Events\TaxonomyCreated;
 use Statamic\Events\TaxonomyDeleted;
 use Statamic\Events\TaxonomySaved;
@@ -167,6 +173,12 @@ class StatamicLoggerEventSubscriber
             SiteCreated::class => Site::class,
             SiteDeleted::class => Site::class,
             SiteSaved::class => Site::class,
+
+            SubmissionCreated::class => Submission::class,
+            SubmissionCreating::class => Submission::class,
+            SubmissionDeleted::class => Submission::class,
+            SubmissionSaved::class => Submission::class,
+            SubmissionSaving::class => Submission::class,
 
             StacheCleared::class => Utility::class,
             StacheWarmed::class => Utility::class,
