@@ -59,6 +59,11 @@ use Statamic\Events\SiteSaved;
 use Statamic\Events\StacheCleared;
 use Statamic\Events\StacheWarmed;
 use Statamic\Events\StaticCacheCleared;
+use Statamic\Events\SubmissionCreated;
+use Statamic\Events\SubmissionCreating;
+use Statamic\Events\SubmissionDeleted;
+use Statamic\Events\SubmissionSaved;
+use Statamic\Events\SubmissionSaving;
 use Statamic\Events\TaxonomyCreated;
 use Statamic\Events\TaxonomyDeleted;
 use Statamic\Events\TaxonomySaved;
@@ -146,6 +151,12 @@ beforeEach(function () {
         StacheWarmed::class,
 
         StaticCacheCleared::class,
+
+        SubmissionCreated::class,
+        SubmissionCreating::class,
+        SubmissionDeleted::class,
+        SubmissionSaved::class,
+        SubmissionSaving::class,
 
         TaxonomyCreated::class,
         TaxonomyDeleted::class,

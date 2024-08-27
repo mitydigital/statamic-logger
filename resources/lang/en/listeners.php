@@ -17,5 +17,7 @@ return [
 
     'nav_tree' => ":action ':id' Nav order in the ':site' Site",
 
+    'submission' => ":action submission for form ':form'",
+
     'term' => ":action ':name' in the ':taxonomy_name' Taxonomy",
 ];
