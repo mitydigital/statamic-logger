@@ -4,10 +4,10 @@
 
 @section('content')
 
-    <statamic-logger-viewer
+    <mity-logger-viewer
             breadcrumb-url="{{ cp_route('utilities.index') }}"
             dates="{{ $dates }}"
             title="{{ __('statamic-logger::utility.title') }}">
-    </statamic-logger-viewer>
+    </mity-logger-viewer>
 
 @endsection
