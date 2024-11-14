@@ -19,7 +19,7 @@ it('returns the correct user group data structure', function () {
     $event = new UserGroupSaved($userGroup);
 
     // create the listener
-    $listener = new UserGroup();
+    $listener = new UserGroup;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -33,7 +33,7 @@ it('returns the correct user group data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new UserGroup();
+    $listener = new UserGroup;
 
     expect($listener->view())->toBe('statamic-logger::listeners.user-group');
 });

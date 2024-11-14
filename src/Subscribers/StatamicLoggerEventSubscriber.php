@@ -18,6 +18,7 @@ use MityDigital\StatamicLogger\Listeners\Fieldset;
 use MityDigital\StatamicLogger\Listeners\Form;
 use MityDigital\StatamicLogger\Listeners\GlobalSet;
 use MityDigital\StatamicLogger\Listeners\Impersonation;
+use MityDigital\StatamicLogger\Listeners\LocalizedTerm;
 use MityDigital\StatamicLogger\Listeners\Nav;
 use MityDigital\StatamicLogger\Listeners\NavTree;
 use MityDigital\StatamicLogger\Listeners\Role;
@@ -38,6 +39,7 @@ use Statamic\Events\AssetSaved;
 use Statamic\Events\AssetUploaded;
 use Statamic\Events\BlueprintCreated;
 use Statamic\Events\BlueprintDeleted;
+use Statamic\Events\BlueprintReset;
 use Statamic\Events\BlueprintSaved;
 use Statamic\Events\CollectionCreated;
 use Statamic\Events\CollectionDeleted;
@@ -61,6 +63,8 @@ use Statamic\Events\ImpersonationEnded;
 use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\LicenseSet;
 use Statamic\Events\LicensesRefreshed;
+use Statamic\Events\LocalizedTermDeleted;
+use Statamic\Events\LocalizedTermSaved;
 use Statamic\Events\NavCreated;
 use Statamic\Events\NavCreating;
 use Statamic\Events\NavDeleted;
@@ -123,6 +127,7 @@ class StatamicLoggerEventSubscriber
 
             BlueprintCreated::class => Blueprint::class,
             BlueprintDeleted::class => Blueprint::class,
+            BlueprintReset::class => Blueprint::class,
             BlueprintSaved::class => Blueprint::class,
 
             CollectionCreated::class => Collection::class,
@@ -155,6 +160,9 @@ class StatamicLoggerEventSubscriber
 
             LicenseSet::class => Utility::class,
             LicensesRefreshed::class => Utility::class,
+
+            LocalizedTermDeleted::class => LocalizedTerm::class,
+            LocalizedTermSaved::class => LocalizedTerm::class,
 
             NavCreated::class => Nav::class,
             NavCreating::class => Nav::class,

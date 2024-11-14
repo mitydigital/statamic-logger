@@ -15,7 +15,7 @@ it('returns the correct user data structure', function () {
     $event = new SiteSaved($site);
 
     // create the listener
-    $listener = new Site();
+    $listener = new Site;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -29,7 +29,7 @@ it('returns the correct user data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Site();
+    $listener = new Site;
 
     expect($listener->view())->toBe('statamic-logger::listeners.site');
 });

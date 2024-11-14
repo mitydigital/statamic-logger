@@ -61,7 +61,7 @@ class LogResource extends JsonResource
                 //
                 // convert to a statamic logger entry
                 //
-                $entry = new Entry();
+                $entry = new Entry;
                 foreach ($message->data as $key => $value) {
                     $entry->$key = $value;
                 }

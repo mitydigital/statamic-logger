@@ -20,7 +20,7 @@ it('returns the correct user data structure', function () {
     $event = new UserSaved($user);
 
     // create the listener
-    $listener = new User();
+    $listener = new User;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -34,7 +34,7 @@ it('returns the correct user data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new User();
+    $listener = new User;
 
     expect($listener->view())->toBe('statamic-logger::listeners.user');
 });

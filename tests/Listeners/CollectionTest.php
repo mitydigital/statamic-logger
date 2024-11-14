@@ -9,7 +9,7 @@ it('returns the correct collection data structure', function () {
     Event::fake();
 
     // create supporting components
-    $collection = (new \Statamic\Entries\Collection())
+    $collection = (new \Statamic\Entries\Collection)
         ->title('Blog Posts')
         ->handle('blog')
         ->sites(['default'])
@@ -19,7 +19,7 @@ it('returns the correct collection data structure', function () {
     $event = new CollectionSaved($collection);
 
     // create the listener
-    $listener = new Collection();
+    $listener = new Collection;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -33,7 +33,7 @@ it('returns the correct collection data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Collection();
+    $listener = new Collection;
 
     expect($listener->view())->toBe('statamic-logger::listeners.collection');
 });

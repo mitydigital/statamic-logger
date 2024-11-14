@@ -20,6 +20,7 @@ use Statamic\Events\AssetSaved;
 use Statamic\Events\AssetUploaded;
 use Statamic\Events\BlueprintCreated;
 use Statamic\Events\BlueprintDeleted;
+use Statamic\Events\BlueprintReset;
 use Statamic\Events\BlueprintSaved;
 use Statamic\Events\CollectionCreated;
 use Statamic\Events\CollectionDeleted;
@@ -43,6 +44,8 @@ use Statamic\Events\ImpersonationEnded;
 use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\LicenseSet;
 use Statamic\Events\LicensesRefreshed;
+use Statamic\Events\LocalizedTermDeleted;
+use Statamic\Events\LocalizedTermSaved;
 use Statamic\Events\NavCreated;
 use Statamic\Events\NavCreating;
 use Statamic\Events\NavDeleted;
@@ -96,6 +99,7 @@ beforeEach(function () {
 
         BlueprintCreated::class,
         BlueprintDeleted::class,
+        BlueprintReset::class,
         BlueprintSaved::class,
 
         CollectionCreated::class,
@@ -128,6 +132,9 @@ beforeEach(function () {
 
         LicenseSet::class,
         LicensesRefreshed::class,
+
+        LocalizedTermDeleted::class,
+        LocalizedTermSaved::class,
 
         NavCreated::class,
         NavCreating::class,

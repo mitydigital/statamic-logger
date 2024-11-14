@@ -15,6 +15,8 @@ return [
     'impersonated' => 'Impersonated',
     'impersonator' => 'Impersonator',
 
+    'localized_term' => ":action ':name' in the ':taxonomy_name' Taxonomy in the ':site' Site",
+
     'nav_tree' => ":action ':id' Nav order in the ':site' Site",
 
     'submission' => ":action submission for form ':form'",

@@ -10,7 +10,7 @@ it('returns the correct blueprint data structure', function () {
     Event::fake();
 
     // create supporting components
-    $collection = (new Collection())
+    $collection = (new Collection)
         ->title('Blog Posts')
         ->handle('blog')
         ->save();
@@ -34,7 +34,7 @@ it('returns the correct blueprint data structure', function () {
     $event = new BlueprintSaved($blueprint);
 
     // create the listener
-    $listener = new Blueprint();
+    $listener = new Blueprint;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -51,7 +51,7 @@ it('returns the correct blueprint data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Blueprint();
+    $listener = new Blueprint;
 
     expect($listener->view())->toBe('statamic-logger::listeners.blueprint');
 });

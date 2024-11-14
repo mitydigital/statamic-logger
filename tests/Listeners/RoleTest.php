@@ -18,7 +18,7 @@ it('returns the correct role data structure', function () {
     $event = new RoleSaved($role);
 
     // create the listener
-    $listener = new Role();
+    $listener = new Role;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -32,7 +32,7 @@ it('returns the correct role data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Role();
+    $listener = new Role;
 
     expect($listener->view())->toBe('statamic-logger::listeners.role');
 });

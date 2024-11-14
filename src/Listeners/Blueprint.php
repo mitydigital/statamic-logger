@@ -5,6 +5,7 @@ namespace MityDigital\StatamicLogger\Listeners;
 use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\BlueprintCreated;
 use Statamic\Events\BlueprintDeleted;
+use Statamic\Events\BlueprintReset;
 use Statamic\Events\BlueprintSaved;
 
 class Blueprint extends EventListener
@@ -28,6 +29,7 @@ class Blueprint extends EventListener
         return match ($event) {
             BlueprintCreated::class => __('statamic-logger::verbs.created'),
             BlueprintDeleted::class => __('statamic-logger::verbs.deleted'),
+            BlueprintReset::class => __('statamic-logger::verbs.reset'),
             BlueprintSaved::class => __('statamic-logger::verbs.saved')
         };
     }
