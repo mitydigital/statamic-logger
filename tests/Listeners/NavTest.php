@@ -18,7 +18,7 @@ it('returns the correct nav data structure', function () {
     $event = new NavSaved($nav);
 
     // create the listener
-    $listener = new Nav();
+    $listener = new Nav;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -32,7 +32,7 @@ it('returns the correct nav data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Nav();
+    $listener = new Nav;
 
     expect($listener->view())->toBe('statamic-logger::listeners.nav');
 });

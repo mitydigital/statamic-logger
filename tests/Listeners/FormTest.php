@@ -17,7 +17,7 @@ it('returns the correct form data structure', function () {
     $event = new FormSaved($form);
 
     // create the listener
-    $listener = new Form();
+    $listener = new Form;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -31,7 +31,7 @@ it('returns the correct form data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Form();
+    $listener = new Form;
 
     expect($listener->view())->toBe('statamic-logger::listeners.form');
 });

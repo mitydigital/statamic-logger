@@ -19,6 +19,7 @@ return [
 
     'refreshed' => 'Refreshed',
     'replaced' => 'Replaced',
+    'reset' => 'Reset',
     'reuploaded' => 'Re-uploaded',
 
     'saved' => 'Saved',

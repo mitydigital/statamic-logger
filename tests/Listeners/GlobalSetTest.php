@@ -17,7 +17,7 @@ it('returns the correct form data structure', function () {
     $event = new GlobalSetSaved($globalSet);
 
     // create the listener
-    $listener = new GlobalSet();
+    $listener = new GlobalSet;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -31,7 +31,7 @@ it('returns the correct form data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new GlobalSet();
+    $listener = new GlobalSet;
 
     expect($listener->view())->toBe('statamic-logger::listeners.global-set');
 });

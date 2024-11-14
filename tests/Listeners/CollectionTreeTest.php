@@ -13,13 +13,13 @@ it('returns the correct collection tree data structure', function () {
     Event::fake();
 
     // create supporting components
-    $collection = (new Collection())
+    $collection = (new Collection)
         ->title('Blog Posts')
         ->handle('blog')
         ->sites(['default'])
         ->save();
 
-    $structure = (new CollectionStructure())
+    $structure = (new CollectionStructure)
         ->maxDepth(1)
         ->showSlugs(true);
     $collection->structure($structure);
@@ -46,7 +46,7 @@ it('returns the correct collection tree data structure', function () {
     $event = new CollectionTreeSaved($tree);
 
     // create the listener
-    $listener = new CollectionTree();
+    $listener = new CollectionTree;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -63,7 +63,7 @@ it('returns the correct collection tree data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new CollectionTree();
+    $listener = new CollectionTree;
 
     expect($listener->view())->toBe('statamic-logger::listeners.collection-tree');
 });

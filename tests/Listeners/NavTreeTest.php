@@ -22,7 +22,7 @@ it('returns the correct nav tree data structure', function () {
     $event = new NavTreeSaved($tree);
 
     // create the listener
-    $listener = new NavTree();
+    $listener = new NavTree;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -36,7 +36,7 @@ it('returns the correct nav tree data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new NavTree();
+    $listener = new NavTree;
 
     expect($listener->view())->toBe('statamic-logger::listeners.nav-tree');
 });

@@ -9,10 +9,10 @@ it('returns the correct user data structure', function () {
     Event::fake();
 
     // create the event
-    $event = new StacheWarmed();
+    $event = new StacheWarmed;
 
     // create the listener
-    $listener = new Utility();
+    $listener = new Utility;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -21,7 +21,7 @@ it('returns the correct user data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Utility();
+    $listener = new Utility;
 
     expect($listener->view())->toBe('statamic-logger::listeners.utility');
 });

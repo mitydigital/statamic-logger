@@ -87,7 +87,7 @@ it('returns the avatar if one is configured', function () {
     expect($this->user->avatar())->toBeNull();
 
     // create asset container
-    $assetContainer = (new AssetContainer())
+    $assetContainer = (new AssetContainer)
         ->title('Test Container')
         ->handle('test_container')
         ->disk('assets')

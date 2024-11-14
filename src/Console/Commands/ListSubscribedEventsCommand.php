@@ -17,7 +17,7 @@ class ListSubscribedEventsCommand extends Command
         $subscriber = app()->make(StatamicLoggerEventSubscriber::class);
 
         // get the events
-        $events = collect($subscriber->subscribe(new Dispatcher()))
+        $events = collect($subscriber->subscribe(new Dispatcher))
             ->sortKeys()
             ->map(function ($listener, $event) {
                 return [

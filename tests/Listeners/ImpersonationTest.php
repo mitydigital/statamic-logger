@@ -28,7 +28,7 @@ it('returns the correct user data structure', function () {
     $event = new ImpersonationStarted($impersonator, $impersonated);
 
     // create the listener
-    $listener = new Impersonation();
+    $listener = new Impersonation;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -57,7 +57,7 @@ it('returns the correct user data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Impersonation();
+    $listener = new Impersonation;
 
     expect($listener->view())->toBe('statamic-logger::listeners.impersonation');
 });

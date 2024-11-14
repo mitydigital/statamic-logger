@@ -44,7 +44,7 @@ class ServiceProvider extends AddonServiceProvider
         // set up the facade
         //
         $this->app->bind('StatamicLogger', function () {
-            return new StatamicLogger();
+            return new StatamicLogger;
         });
 
         //

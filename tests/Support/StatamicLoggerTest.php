@@ -64,8 +64,8 @@ it('returns the correct enabled state of statamic logger', function () {
 });
 
 it('returns a new uuid for each new instance of the statamic logger', function () {
-    $uuid1 = (new StatamicLogger())->getRequestId();
-    $uuid2 = (new StatamicLogger())->getRequestId();
+    $uuid1 = (new StatamicLogger)->getRequestId();
+    $uuid2 = (new StatamicLogger)->getRequestId();
 
     expect($uuid1)
         ->not()->toBeNull()

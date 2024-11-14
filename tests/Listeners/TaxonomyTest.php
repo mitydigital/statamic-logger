@@ -18,7 +18,7 @@ it('returns the correct taxonomy data structure', function () {
     $event = new TaxonomySaved($taxonomy);
 
     // create the listener
-    $listener = new Taxonomy();
+    $listener = new Taxonomy;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -32,7 +32,7 @@ it('returns the correct taxonomy data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Taxonomy();
+    $listener = new Taxonomy;
 
     expect($listener->view())->toBe('statamic-logger::listeners.taxonomy');
 });

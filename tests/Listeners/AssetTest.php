@@ -11,7 +11,7 @@ it('returns the correct asset data structure', function () {
     Event::fake();
 
     // supporting components
-    $assetContainer = (new AssetContainer())
+    $assetContainer = (new AssetContainer)
         ->title('Test Container')
         ->handle('test_container')
         ->disk('assets')
@@ -34,17 +34,17 @@ it('returns the correct asset data structure', function () {
     $event = new AssetSaved($asset);
 
     // create the listener
-    $listener = new Asset();
+    $listener = new Asset;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
         ->toHaveCount(3)
         // id
         ->toHaveKey('id')
-        ->and($data['id'])->toBe('test_container::mity.png')
+        ->and($data['id'])->toBe('test_container::test_asset.png')
         // name
         ->and($data)->toHaveKey('name')
-        ->and($data['name'])->toBe('mity.png')
+        ->and($data['name'])->toBe('test_asset.png')
         // container
         ->and($data)->toHaveKey('container')
         // container - id
@@ -56,7 +56,7 @@ it('returns the correct asset data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Asset();
+    $listener = new Asset;
 
     expect($listener->view())->toBe('statamic-logger::listeners.asset');
 });

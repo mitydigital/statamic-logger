@@ -11,7 +11,7 @@ it('returns the correct entry data structure', function () {
     Event::fake();
 
     // create supporting components
-    $collection = (new Collection())
+    $collection = (new Collection)
         ->title('Blog Posts')
         ->handle('blog')
         ->sites(['default'])
@@ -28,7 +28,7 @@ it('returns the correct entry data structure', function () {
     $event = new EntrySaved($entry);
 
     // create the listener
-    $listener = new Entry();
+    $listener = new Entry;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -53,7 +53,7 @@ it('returns the correct entry data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Entry();
+    $listener = new Entry;
 
     expect($listener->view())->toBe('statamic-logger::listeners.entry');
 });

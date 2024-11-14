@@ -20,7 +20,7 @@ it('returns the correct fieldset data structure', function () {
     $event = new FieldsetSaved($fieldset);
 
     // create the listener
-    $listener = new Fieldset();
+    $listener = new Fieldset;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -34,7 +34,7 @@ it('returns the correct fieldset data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new Fieldset();
+    $listener = new Fieldset;
 
     expect($listener->view())->toBe('statamic-logger::listeners.fieldset');
 });

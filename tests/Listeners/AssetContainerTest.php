@@ -9,7 +9,7 @@ it('returns the correct asset container data structure', function () {
     Event::fake();
 
     // create supporting components
-    $assetContainer = (new \Statamic\Assets\AssetContainer())
+    $assetContainer = (new \Statamic\Assets\AssetContainer)
         ->title('Test Container')
         ->handle('test_container')
         ->disk('assets')
@@ -19,7 +19,7 @@ it('returns the correct asset container data structure', function () {
     $event = new AssetContainerSaved($assetContainer);
 
     // create the listener
-    $listener = new AssetContainer();
+    $listener = new AssetContainer;
     $data = getEventHandlerData($listener, $event);
 
     expect($data)
@@ -33,7 +33,7 @@ it('returns the correct asset container data structure', function () {
 });
 
 it('returns the correct view', function () {
-    $listener = new AssetContainer();
+    $listener = new AssetContainer;
 
     expect($listener->view())->toBe('statamic-logger::listeners.asset-container');
 });
