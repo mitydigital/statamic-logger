@@ -24,6 +24,7 @@ use MityDigital\StatamicLogger\Listeners\Impersonation;
 use MityDigital\StatamicLogger\Listeners\LocalizedTerm;
 use MityDigital\StatamicLogger\Listeners\Nav;
 use MityDigital\StatamicLogger\Listeners\NavTree;
+use MityDigital\StatamicLogger\Listeners\Revision;
 use MityDigital\StatamicLogger\Listeners\Role;
 use MityDigital\StatamicLogger\Listeners\Site;
 use MityDigital\StatamicLogger\Listeners\Submission;
@@ -81,6 +82,8 @@ use Statamic\Events\NavSaved;
 use Statamic\Events\NavSaving;
 use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
+use Statamic\Events\RevisionDeleted;
+use Statamic\Events\RevisionSaved;
 use Statamic\Events\RoleDeleted;
 use Statamic\Events\RoleSaved;
 use Statamic\Events\SearchIndexUpdated;
@@ -190,6 +193,9 @@ class StatamicLoggerEventSubscriber
 
             NavTreeDeleted::class => NavTree::class,
             NavTreeSaved::class => NavTree::class,
+
+            RevisionDeleted::class => Revision::class,
+            RevisionSaved::class => Revision::class,
 
             RoleDeleted::class => Role::class,
             RoleSaved::class => Role::class,

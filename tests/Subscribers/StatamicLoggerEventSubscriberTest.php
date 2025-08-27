@@ -59,6 +59,8 @@ use Statamic\Events\NavSaved;
 use Statamic\Events\NavSaving;
 use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
+use Statamic\Events\RevisionDeleted;
+use Statamic\Events\RevisionSaved;
 use Statamic\Events\RoleDeleted;
 use Statamic\Events\RoleSaved;
 use Statamic\Events\SearchIndexUpdated;
@@ -159,6 +161,9 @@ beforeEach(function () {
 
         NavTreeDeleted::class,
         NavTreeSaved::class,
+
+        RevisionDeleted::class,
+        RevisionSaved::class,
 
         RoleDeleted::class,
         RoleSaved::class,

@@ -25,6 +25,8 @@ return [
 
     'nav_tree' => ":action ':id' Nav order in the ':site' Site",
 
+    'revision' => ":action revision ':id' for ':entry_name' (:entry_id) in ':collection_name' for the ':site' Site",
+
     'submission' => ":action submission for form ':form'",
 
     'term' => ":action ':name' in the ':taxonomy_name' Taxonomy",
