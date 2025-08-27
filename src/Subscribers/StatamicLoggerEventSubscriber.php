@@ -19,6 +19,7 @@ use MityDigital\StatamicLogger\Listeners\Entry;
 use MityDigital\StatamicLogger\Listeners\Fieldset;
 use MityDigital\StatamicLogger\Listeners\Form;
 use MityDigital\StatamicLogger\Listeners\GlobalSet;
+use MityDigital\StatamicLogger\Listeners\GlobalVariables;
 use MityDigital\StatamicLogger\Listeners\Impersonation;
 use MityDigital\StatamicLogger\Listeners\LocalizedTerm;
 use MityDigital\StatamicLogger\Listeners\Nav;
@@ -64,6 +65,9 @@ use Statamic\Events\GlideCacheCleared;
 use Statamic\Events\GlobalSetCreated;
 use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
+use Statamic\Events\GlobalVariablesCreated;
+use Statamic\Events\GlobalVariablesDeleted;
+use Statamic\Events\GlobalVariablesSaved;
 use Statamic\Events\ImpersonationEnded;
 use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\LicenseSet;
@@ -164,6 +168,10 @@ class StatamicLoggerEventSubscriber
             GlobalSetCreated::class => GlobalSet::class,
             GlobalSetDeleted::class => GlobalSet::class,
             GlobalSetSaved::class => GlobalSet::class,
+
+            GlobalVariablesCreated::class => GlobalVariables::class,
+            GlobalVariablesDeleted::class => GlobalVariables::class,
+            GlobalVariablesSaved::class => GlobalVariables::class,
 
             ImpersonationEnded::class => Impersonation::class,
             ImpersonationStarted::class => Impersonation::class,

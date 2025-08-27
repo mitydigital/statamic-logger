@@ -16,6 +16,8 @@ return [
 
     'entry' => ":action ':name' in the ':collection_name' Collection",
 
+    'global_variables' => ":action ':id' variables",
+
     'impersonated' => 'Impersonated',
     'impersonator' => 'Impersonator',
 

@@ -43,6 +43,9 @@ use Statamic\Events\GlideCacheCleared;
 use Statamic\Events\GlobalSetCreated;
 use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
+use Statamic\Events\GlobalVariablesCreated;
+use Statamic\Events\GlobalVariablesDeleted;
+use Statamic\Events\GlobalVariablesSaved;
 use Statamic\Events\ImpersonationEnded;
 use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\LicenseSet;
@@ -134,6 +137,10 @@ beforeEach(function () {
         GlobalSetCreated::class,
         GlobalSetDeleted::class,
         GlobalSetSaved::class,
+
+        GlobalVariablesCreated::class,
+        GlobalVariablesDeleted::class,
+        GlobalVariablesSaved::class,
 
         ImpersonationEnded::class,
         ImpersonationStarted::class,
