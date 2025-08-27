@@ -8,8 +8,10 @@ use Illuminate\Auth\Events\Logout as AuthLogout;
 use Illuminate\Auth\Events\PasswordReset as AuthPasswordReset;
 use Illuminate\Events\Dispatcher;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
+use MityDigital\StatamicLogger\Listeners\AddonSettings;
 use MityDigital\StatamicLogger\Listeners\Asset;
 use MityDigital\StatamicLogger\Listeners\AssetContainer;
+use MityDigital\StatamicLogger\Listeners\AssetFolder;
 use MityDigital\StatamicLogger\Listeners\Blueprint;
 use MityDigital\StatamicLogger\Listeners\Collection;
 use MityDigital\StatamicLogger\Listeners\CollectionTree;
@@ -17,22 +19,28 @@ use MityDigital\StatamicLogger\Listeners\Entry;
 use MityDigital\StatamicLogger\Listeners\Fieldset;
 use MityDigital\StatamicLogger\Listeners\Form;
 use MityDigital\StatamicLogger\Listeners\GlobalSet;
+use MityDigital\StatamicLogger\Listeners\GlobalVariables;
 use MityDigital\StatamicLogger\Listeners\Impersonation;
 use MityDigital\StatamicLogger\Listeners\LocalizedTerm;
 use MityDigital\StatamicLogger\Listeners\Nav;
 use MityDigital\StatamicLogger\Listeners\NavTree;
+use MityDigital\StatamicLogger\Listeners\Revision;
 use MityDigital\StatamicLogger\Listeners\Role;
 use MityDigital\StatamicLogger\Listeners\Site;
 use MityDigital\StatamicLogger\Listeners\Submission;
 use MityDigital\StatamicLogger\Listeners\Taxonomy;
 use MityDigital\StatamicLogger\Listeners\Term;
+use MityDigital\StatamicLogger\Listeners\TwoFactor;
 use MityDigital\StatamicLogger\Listeners\User;
 use MityDigital\StatamicLogger\Listeners\UserGroup;
 use MityDigital\StatamicLogger\Listeners\Utility;
+use Statamic\Events\AddonSettingsSaved;
 use Statamic\Events\AssetContainerCreated;
 use Statamic\Events\AssetContainerDeleted;
 use Statamic\Events\AssetContainerSaved;
 use Statamic\Events\AssetDeleted;
+use Statamic\Events\AssetFolderDeleted;
+use Statamic\Events\AssetFolderSaved;
 use Statamic\Events\AssetReplaced;
 use Statamic\Events\AssetReuploaded;
 use Statamic\Events\AssetSaved;
@@ -59,6 +67,9 @@ use Statamic\Events\GlideCacheCleared;
 use Statamic\Events\GlobalSetCreated;
 use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
+use Statamic\Events\GlobalVariablesCreated;
+use Statamic\Events\GlobalVariablesDeleted;
+use Statamic\Events\GlobalVariablesSaved;
 use Statamic\Events\ImpersonationEnded;
 use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\LicenseSet;
@@ -72,6 +83,8 @@ use Statamic\Events\NavSaved;
 use Statamic\Events\NavSaving;
 use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
+use Statamic\Events\RevisionDeleted;
+use Statamic\Events\RevisionSaved;
 use Statamic\Events\RoleDeleted;
 use Statamic\Events\RoleSaved;
 use Statamic\Events\SearchIndexUpdated;
@@ -92,6 +105,11 @@ use Statamic\Events\TaxonomySaved;
 use Statamic\Events\TermCreated;
 use Statamic\Events\TermDeleted;
 use Statamic\Events\TermSaved;
+use Statamic\Events\TwoFactorAuthenticationChallenged;
+use Statamic\Events\TwoFactorAuthenticationDisabled;
+use Statamic\Events\TwoFactorAuthenticationEnabled;
+use Statamic\Events\TwoFactorAuthenticationFailed;
+use Statamic\Events\TwoFactorRecoveryCodeReplaced;
 use Statamic\Events\UserCreated;
 use Statamic\Events\UserDeleted;
 use Statamic\Events\UserGroupDeleted;
@@ -110,6 +128,8 @@ class StatamicLoggerEventSubscriber
 
         // get the default subscriptions
         $subscribed = [
+            AddonSettingsSaved::class => AddonSettings::class,
+
             AssetContainerCreated::class => AssetContainer::class,
             AssetContainerDeleted::class => AssetContainer::class,
             AssetContainerSaved::class => AssetContainer::class,
@@ -119,6 +139,9 @@ class StatamicLoggerEventSubscriber
             AssetReuploaded::class => Asset::class,
             AssetSaved::class => Asset::class,
             AssetUploaded::class => Asset::class,
+
+            AssetFolderDeleted::class => AssetFolder::class,
+            AssetFolderSaved::class => AssetFolder::class,
 
             AuthLogin::class => User::class,
             AuthLogout::class => User::class,
@@ -155,6 +178,10 @@ class StatamicLoggerEventSubscriber
             GlobalSetDeleted::class => GlobalSet::class,
             GlobalSetSaved::class => GlobalSet::class,
 
+            GlobalVariablesCreated::class => GlobalVariables::class,
+            GlobalVariablesDeleted::class => GlobalVariables::class,
+            GlobalVariablesSaved::class => GlobalVariables::class,
+
             ImpersonationEnded::class => Impersonation::class,
             ImpersonationStarted::class => Impersonation::class,
 
@@ -172,6 +199,9 @@ class StatamicLoggerEventSubscriber
 
             NavTreeDeleted::class => NavTree::class,
             NavTreeSaved::class => NavTree::class,
+
+            RevisionDeleted::class => Revision::class,
+            RevisionSaved::class => Revision::class,
 
             RoleDeleted::class => Role::class,
             RoleSaved::class => Role::class,
@@ -200,6 +230,12 @@ class StatamicLoggerEventSubscriber
             TermCreated::class => Term::class,
             TermDeleted::class => Term::class,
             TermSaved::class => Term::class,
+
+            TwoFactorAuthenticationChallenged::class => TwoFactor::class,
+            TwoFactorAuthenticationDisabled::class => TwoFactor::class,
+            TwoFactorAuthenticationEnabled::class => TwoFactor::class,
+            TwoFactorAuthenticationFailed::class => TwoFactor::class,
+            TwoFactorRecoveryCodeReplaced::class => TwoFactor::class,
 
             UserCreated::class => User::class,
             UserDeleted::class => User::class,

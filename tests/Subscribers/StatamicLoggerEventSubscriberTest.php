@@ -10,10 +10,13 @@ use MityDigital\StatamicLogger\Abstracts\EventListener;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use MityDigital\StatamicLogger\Listeners\Entry;
 use MityDigital\StatamicLogger\Subscribers\StatamicLoggerEventSubscriber;
+use Statamic\Events\AddonSettingsSaved;
 use Statamic\Events\AssetContainerCreated;
 use Statamic\Events\AssetContainerDeleted;
 use Statamic\Events\AssetContainerSaved;
 use Statamic\Events\AssetDeleted;
+use Statamic\Events\AssetFolderDeleted;
+use Statamic\Events\AssetFolderSaved;
 use Statamic\Events\AssetReplaced;
 use Statamic\Events\AssetReuploaded;
 use Statamic\Events\AssetSaved;
@@ -40,6 +43,9 @@ use Statamic\Events\GlideCacheCleared;
 use Statamic\Events\GlobalSetCreated;
 use Statamic\Events\GlobalSetDeleted;
 use Statamic\Events\GlobalSetSaved;
+use Statamic\Events\GlobalVariablesCreated;
+use Statamic\Events\GlobalVariablesDeleted;
+use Statamic\Events\GlobalVariablesSaved;
 use Statamic\Events\ImpersonationEnded;
 use Statamic\Events\ImpersonationStarted;
 use Statamic\Events\LicenseSet;
@@ -53,6 +59,8 @@ use Statamic\Events\NavSaved;
 use Statamic\Events\NavSaving;
 use Statamic\Events\NavTreeDeleted;
 use Statamic\Events\NavTreeSaved;
+use Statamic\Events\RevisionDeleted;
+use Statamic\Events\RevisionSaved;
 use Statamic\Events\RoleDeleted;
 use Statamic\Events\RoleSaved;
 use Statamic\Events\SearchIndexUpdated;
@@ -73,6 +81,11 @@ use Statamic\Events\TaxonomySaved;
 use Statamic\Events\TermCreated;
 use Statamic\Events\TermDeleted;
 use Statamic\Events\TermSaved;
+use Statamic\Events\TwoFactorAuthenticationChallenged;
+use Statamic\Events\TwoFactorAuthenticationDisabled;
+use Statamic\Events\TwoFactorAuthenticationEnabled;
+use Statamic\Events\TwoFactorAuthenticationFailed;
+use Statamic\Events\TwoFactorRecoveryCodeReplaced;
 use Statamic\Events\UserCreated;
 use Statamic\Events\UserDeleted;
 use Statamic\Events\UserGroupDeleted;
@@ -82,6 +95,8 @@ use Statamic\Events\UserSaved;
 
 beforeEach(function () {
     $this->events = [
+        AddonSettingsSaved::class,
+
         AssetContainerCreated::class,
         AssetContainerDeleted::class,
         AssetContainerSaved::class,
@@ -91,6 +106,9 @@ beforeEach(function () {
         AssetReuploaded::class,
         AssetSaved::class,
         AssetUploaded::class,
+
+        AssetFolderDeleted::class,
+        AssetFolderSaved::class,
 
         AuthLogin::class,
         AuthLogout::class,
@@ -127,6 +145,10 @@ beforeEach(function () {
         GlobalSetDeleted::class,
         GlobalSetSaved::class,
 
+        GlobalVariablesCreated::class,
+        GlobalVariablesDeleted::class,
+        GlobalVariablesSaved::class,
+
         ImpersonationEnded::class,
         ImpersonationStarted::class,
 
@@ -144,6 +166,9 @@ beforeEach(function () {
 
         NavTreeDeleted::class,
         NavTreeSaved::class,
+
+        RevisionDeleted::class,
+        RevisionSaved::class,
 
         RoleDeleted::class,
         RoleSaved::class,
@@ -173,6 +198,12 @@ beforeEach(function () {
         TermDeleted::class,
         TermSaved::class,
 
+        TwoFactorAuthenticationChallenged::class,
+        TwoFactorAuthenticationDisabled::class,
+        TwoFactorAuthenticationEnabled::class,
+        TwoFactorAuthenticationFailed::class,
+        TwoFactorRecoveryCodeReplaced::class,
+
         UserCreated::class,
         UserDeleted::class,
         UserSaved::class,
@@ -185,7 +216,6 @@ beforeEach(function () {
 });
 
 it('tracks the correct events', function () {
-
     $subscriber = new StatamicLoggerEventSubscriber;
     $subscribed = $subscriber->subscribe(new Dispatcher);
 

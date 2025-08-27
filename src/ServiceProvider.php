@@ -71,7 +71,7 @@ class ServiceProvider extends AddonServiceProvider
             Utility::extend(fn () => Utility::register($utility)
                 ->title(__('statamic-logger::utility.title'))
                 ->navTitle(__('statamic-logger::utility.nav_title'))
-                ->icon(file_get_contents($this->getAddon()->directory().'resources/icons/logger.svg'))
+                ->icon(Facades\StatamicLogger::getIcon())
                 ->description(__('statamic-logger::utility.description'))
                 ->docsUrl('https://docs.mity.com.au')
                 ->routes(function (Router $router) {

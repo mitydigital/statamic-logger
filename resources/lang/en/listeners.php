@@ -4,13 +4,19 @@ return [
 
     'id' => 'ID',
 
+    'addon_settings' => ':action Addon Settings for :addon',
+
     'asset' => ":action ':name' in the ':container_name' Container",
+
+    'asset_folder' => ":action ':id' in the ':container_name' Container",
 
     'blueprint' => ":action ':name' in the ':namespace' namespace",
 
     'collection_tree' => ":action ':name' Entry order in the ':site' Site",
 
     'entry' => ":action ':name' in the ':collection_name' Collection",
+
+    'global_variables' => ":action ':id' variables",
 
     'impersonated' => 'Impersonated',
     'impersonator' => 'Impersonator',
@@ -19,7 +25,17 @@ return [
 
     'nav_tree' => ":action ':id' Nav order in the ':site' Site",
 
+    'revision' => ":action revision ':id' for ':entry_name' (:entry_id) in ':collection_name' for the ':site' Site",
+
     'submission' => ":action submission for form ':form'",
 
     'term' => ":action ':name' in the ':taxonomy_name' Taxonomy",
+
+    'two_factor' => [
+        'challenged' => ':user was presented with a Two Factor challenge',
+        'disabled' => ':user disabled Two Factor Authentication',
+        'enabled' => ':user enabled Two Factor Authentication',
+        'failed' => ':user failed a Two Factor challenge',
+        'recovery_code_replaced' => ':user has had a recovery code replaced',
+    ],
 ];

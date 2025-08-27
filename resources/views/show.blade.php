@@ -1,13 +1,24 @@
+@php
+    use MityDigital\StatamicLogger\Facades\StatamicLogger;use function Statamic\trans as __;
+@endphp
+
 @extends('statamic::layout')
 @section('title', __('statamic-logger::utility.title'))
-@section('wrapper_class', 'max-w-full')
 
 @section('content')
 
-    <mity-logger-viewer
+    <ui-header>
+        <template #title>
+            <div class="size-5 text-gray-500">
+                {!! StatamicLogger::getIcon()  !!}
+            </div>
+            {{ __('statamic-logger::utility.title') }}
+        </template>
+    </ui-header>
+
+    <logger-viewer
             breadcrumb-url="{{ cp_route('utilities.index') }}"
-            dates="{{ $dates }}"
-            title="{{ __('statamic-logger::utility.title') }}">
-    </mity-logger-viewer>
+            dates="{{ $dates }}">
+    </logger-viewer>
 
 @endsection
