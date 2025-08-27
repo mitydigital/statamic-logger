@@ -33,7 +33,11 @@ it('returns paginated json when requested', function () {
         ->assertOk()
         ->assertHeader('Content-Type', 'application/json');
 
-    expect($response->json())->toHaveKeys(['current_page', 'data', 'from', 'path', 'per_page', 'to', 'total']);
+    $json = $response->json();
+
+    expect($json)->toHaveKeys(['data', 'meta'])
+        ->and($json['meta'])->toHaveKeys(['current_page', 'from', 'path', 'per_page', 'to', 'total', 'columns'])
+        ->and($json['meta']['columns'])->toBeArray();
 });
 
 it('requires the download request to be in the correct format', function () {
