@@ -11,6 +11,7 @@ use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use MityDigital\StatamicLogger\Listeners\AddonSettings;
 use MityDigital\StatamicLogger\Listeners\Asset;
 use MityDigital\StatamicLogger\Listeners\AssetContainer;
+use MityDigital\StatamicLogger\Listeners\AssetFolder;
 use MityDigital\StatamicLogger\Listeners\Blueprint;
 use MityDigital\StatamicLogger\Listeners\Collection;
 use MityDigital\StatamicLogger\Listeners\CollectionTree;
@@ -35,6 +36,8 @@ use Statamic\Events\AssetContainerCreated;
 use Statamic\Events\AssetContainerDeleted;
 use Statamic\Events\AssetContainerSaved;
 use Statamic\Events\AssetDeleted;
+use Statamic\Events\AssetFolderDeleted;
+use Statamic\Events\AssetFolderSaved;
 use Statamic\Events\AssetReplaced;
 use Statamic\Events\AssetReuploaded;
 use Statamic\Events\AssetSaved;
@@ -123,6 +126,9 @@ class StatamicLoggerEventSubscriber
             AssetReuploaded::class => Asset::class,
             AssetSaved::class => Asset::class,
             AssetUploaded::class => Asset::class,
+
+            AssetFolderDeleted::class => AssetFolder::class,
+            AssetFolderSaved::class => AssetFolder::class,
 
             AuthLogin::class => User::class,
             AuthLogout::class => User::class,

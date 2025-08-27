@@ -8,6 +8,8 @@ return [
 
     'asset' => ":action ':name' in the ':container_name' Container",
 
+    'asset_folder' => ":action ':id' in the ':container_name' Container",
+
     'blueprint' => ":action ':name' in the ':namespace' namespace",
 
     'collection_tree' => ":action ':name' Entry order in the ':site' Site",

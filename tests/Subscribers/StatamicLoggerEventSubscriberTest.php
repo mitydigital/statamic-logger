@@ -15,6 +15,8 @@ use Statamic\Events\AssetContainerCreated;
 use Statamic\Events\AssetContainerDeleted;
 use Statamic\Events\AssetContainerSaved;
 use Statamic\Events\AssetDeleted;
+use Statamic\Events\AssetFolderDeleted;
+use Statamic\Events\AssetFolderSaved;
 use Statamic\Events\AssetReplaced;
 use Statamic\Events\AssetReuploaded;
 use Statamic\Events\AssetSaved;
@@ -94,6 +96,9 @@ beforeEach(function () {
         AssetReuploaded::class,
         AssetSaved::class,
         AssetUploaded::class,
+
+        AssetFolderDeleted::class,
+        AssetFolderSaved::class,
 
         AuthLogin::class,
         AuthLogout::class,
