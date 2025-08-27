@@ -10,6 +10,7 @@ use MityDigital\StatamicLogger\Abstracts\EventListener;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use MityDigital\StatamicLogger\Listeners\Entry;
 use MityDigital\StatamicLogger\Subscribers\StatamicLoggerEventSubscriber;
+use Statamic\Events\AddonSettingsSaved;
 use Statamic\Events\AssetContainerCreated;
 use Statamic\Events\AssetContainerDeleted;
 use Statamic\Events\AssetContainerSaved;
@@ -82,6 +83,8 @@ use Statamic\Events\UserSaved;
 
 beforeEach(function () {
     $this->events = [
+        AddonSettingsSaved::class,
+
         AssetContainerCreated::class,
         AssetContainerDeleted::class,
         AssetContainerSaved::class,
@@ -185,7 +188,6 @@ beforeEach(function () {
 });
 
 it('tracks the correct events', function () {
-
     $subscriber = new StatamicLoggerEventSubscriber;
     $subscribed = $subscriber->subscribe(new Dispatcher);
 

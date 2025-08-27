@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Logout as AuthLogout;
 use Illuminate\Auth\Events\PasswordReset as AuthPasswordReset;
 use Illuminate\Events\Dispatcher;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
+use MityDigital\StatamicLogger\Listeners\AddonSettings;
 use MityDigital\StatamicLogger\Listeners\Asset;
 use MityDigital\StatamicLogger\Listeners\AssetContainer;
 use MityDigital\StatamicLogger\Listeners\Blueprint;
@@ -29,6 +30,7 @@ use MityDigital\StatamicLogger\Listeners\Term;
 use MityDigital\StatamicLogger\Listeners\User;
 use MityDigital\StatamicLogger\Listeners\UserGroup;
 use MityDigital\StatamicLogger\Listeners\Utility;
+use Statamic\Events\AddonSettingsSaved;
 use Statamic\Events\AssetContainerCreated;
 use Statamic\Events\AssetContainerDeleted;
 use Statamic\Events\AssetContainerSaved;
@@ -110,6 +112,8 @@ class StatamicLoggerEventSubscriber
 
         // get the default subscriptions
         $subscribed = [
+            AddonSettingsSaved::class => AddonSettings::class,
+
             AssetContainerCreated::class => AssetContainer::class,
             AssetContainerDeleted::class => AssetContainer::class,
             AssetContainerSaved::class => AssetContainer::class,

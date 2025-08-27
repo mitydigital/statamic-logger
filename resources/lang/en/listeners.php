@@ -4,6 +4,8 @@ return [
 
     'id' => 'ID',
 
+    'addon_settings' => ':action Addon Settings for :addon',
+
     'asset' => ":action ':name' in the ':container_name' Container",
 
     'blueprint' => ":action ':name' in the ':namespace' namespace",
