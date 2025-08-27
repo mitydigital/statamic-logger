@@ -81,6 +81,11 @@ use Statamic\Events\TaxonomySaved;
 use Statamic\Events\TermCreated;
 use Statamic\Events\TermDeleted;
 use Statamic\Events\TermSaved;
+use Statamic\Events\TwoFactorAuthenticationChallenged;
+use Statamic\Events\TwoFactorAuthenticationDisabled;
+use Statamic\Events\TwoFactorAuthenticationEnabled;
+use Statamic\Events\TwoFactorAuthenticationFailed;
+use Statamic\Events\TwoFactorRecoveryCodeReplaced;
 use Statamic\Events\UserCreated;
 use Statamic\Events\UserDeleted;
 use Statamic\Events\UserGroupDeleted;
@@ -192,6 +197,12 @@ beforeEach(function () {
         TermCreated::class,
         TermDeleted::class,
         TermSaved::class,
+
+        TwoFactorAuthenticationChallenged::class,
+        TwoFactorAuthenticationDisabled::class,
+        TwoFactorAuthenticationEnabled::class,
+        TwoFactorAuthenticationFailed::class,
+        TwoFactorRecoveryCodeReplaced::class,
 
         UserCreated::class,
         UserDeleted::class,

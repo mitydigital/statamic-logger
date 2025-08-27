@@ -10,5 +10,6 @@ return [
     'Nav' => 'Navigation',
     'NavTree' => 'Navigation Tree',
     'Term' => 'Taxonomy Term',
+    'TwoFactor' => 'Two Factor',
     'UserGroup' => 'User Group',
 ];

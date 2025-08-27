@@ -30,6 +30,7 @@ use MityDigital\StatamicLogger\Listeners\Site;
 use MityDigital\StatamicLogger\Listeners\Submission;
 use MityDigital\StatamicLogger\Listeners\Taxonomy;
 use MityDigital\StatamicLogger\Listeners\Term;
+use MityDigital\StatamicLogger\Listeners\TwoFactor;
 use MityDigital\StatamicLogger\Listeners\User;
 use MityDigital\StatamicLogger\Listeners\UserGroup;
 use MityDigital\StatamicLogger\Listeners\Utility;
@@ -104,6 +105,11 @@ use Statamic\Events\TaxonomySaved;
 use Statamic\Events\TermCreated;
 use Statamic\Events\TermDeleted;
 use Statamic\Events\TermSaved;
+use Statamic\Events\TwoFactorAuthenticationChallenged;
+use Statamic\Events\TwoFactorAuthenticationDisabled;
+use Statamic\Events\TwoFactorAuthenticationEnabled;
+use Statamic\Events\TwoFactorAuthenticationFailed;
+use Statamic\Events\TwoFactorRecoveryCodeReplaced;
 use Statamic\Events\UserCreated;
 use Statamic\Events\UserDeleted;
 use Statamic\Events\UserGroupDeleted;
@@ -224,6 +230,12 @@ class StatamicLoggerEventSubscriber
             TermCreated::class => Term::class,
             TermDeleted::class => Term::class,
             TermSaved::class => Term::class,
+
+            TwoFactorAuthenticationChallenged::class => TwoFactor::class,
+            TwoFactorAuthenticationDisabled::class => TwoFactor::class,
+            TwoFactorAuthenticationEnabled::class => TwoFactor::class,
+            TwoFactorAuthenticationFailed::class => TwoFactor::class,
+            TwoFactorRecoveryCodeReplaced::class => TwoFactor::class,
 
             UserCreated::class => User::class,
             UserDeleted::class => User::class,

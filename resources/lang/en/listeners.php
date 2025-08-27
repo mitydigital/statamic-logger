@@ -30,4 +30,12 @@ return [
     'submission' => ":action submission for form ':form'",
 
     'term' => ":action ':name' in the ':taxonomy_name' Taxonomy",
+
+    'two_factor' => [
+        'challenged' => ':user was presented with a Two Factor challenge',
+        'disabled' => ':user disabled Two Factor Authentication',
+        'enabled' => ':user enabled Two Factor Authentication',
+        'failed' => ':user failed a Two Factor challenge',
+        'recovery_code_replaced' => ':user has had a recovery code replaced',
+    ],
 ];
