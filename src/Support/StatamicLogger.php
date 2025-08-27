@@ -3,6 +3,7 @@
 namespace MityDigital\StatamicLogger\Support;
 
 use Illuminate\Support\Str;
+use Statamic\Facades\Addon;
 
 class StatamicLogger
 {
@@ -78,5 +79,10 @@ class StatamicLogger
         }
 
         return $filename;
+    }
+
+    public function getIcon(): string
+    {
+        return file_get_contents(Addon::get('mitydigital/statamic-logger')->directory().'resources/icons/logger.svg');
     }
 }

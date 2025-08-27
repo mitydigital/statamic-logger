@@ -1,5 +1,5 @@
-import MityLoggerViewer from './components/viewer.vue';
+import LoggerViewer from './components/LoggerViewer.vue';
 
 Statamic.booting(() => {
-    Statamic.$components.register('mity-logger-viewer', MityLoggerViewer);
+    Statamic.$components.register('logger-viewer', LoggerViewer);
 });

@@ -104,7 +104,6 @@ class LogResource extends JsonResource
                         ) => mb_substr($name, 0, 1))->join('') : null,
                         'avatar' => $this->getUserAvatar($message->user),
                     ];
-
                 }
 
                 //
@@ -143,7 +142,8 @@ class LogResource extends JsonResource
             'date' => $matches['datetime'],
             'user' => $user,
             'type' => $type,
-            'detail' => $render.$debug,
+            'detail' => $render,
+            'raw' => $debug,
         ];
     }
 

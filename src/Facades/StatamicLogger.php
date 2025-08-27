@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static string getRequestId()
  * @method static string getStoragePath()
  * @method static string getStorageFilename()
+ * @method static string getIcon()
  *
  * @see \MityDigital\StatamicLogger\Support\StatamicLogger
  */
