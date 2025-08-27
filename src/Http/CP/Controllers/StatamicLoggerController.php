@@ -15,7 +15,6 @@ class StatamicLoggerController extends Controller
     public function show(Request $request, StatamicLoggerReader $reader)
     {
         if (! $request->expectsJson()) {
-            // return the html view
             return view('statamic-logger::show', [
                 'dates' => $reader->getDates(),
             ]);
@@ -47,10 +46,10 @@ class StatamicLoggerController extends Controller
                 'to' => $totalItems > 0 ? $page * $perPage : null,
                 'total' => $totalItems,
                 'columns' => [
-                    ['field' => 'date', 'label' => 'Date'],
-                    ['field' => 'user', 'label' => 'User'],
-                    ['field' => 'type', 'label' => 'Type'],
-                    ['field' => 'detail', 'label' => 'Details'],
+                    ['field' => 'date', 'label' => __('statamic-logger::utility.columns.date')],
+                    ['field' => 'user', 'label' => __('statamic-logger::utility.columns.user')],
+                    ['field' => 'type', 'label' => __('statamic-logger::utility.columns.type')],
+                    ['field' => 'detail', 'label' => __('statamic-logger::utility.columns.detail')],
                 ],
             ],
         ]);

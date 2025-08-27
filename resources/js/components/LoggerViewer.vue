@@ -32,10 +32,10 @@ const state = reactive({
 const listing = ref(null);
 
 const columns = [
-    {field: 'date'},
-    {field: 'user'},
-    {field: 'type'},
-    {field: 'detail'},
+    {field: 'date', label: __('statamic-logger::utility.columns.date')},
+    {field: 'user', label: __('statamic-logger::utility.columns.user')},
+    {field: 'type', label: __('statamic-logger::utility.columns.type')},
+    {field: 'detail', label: __('statamic-logger::utility.columns.detail')},
 ];
 
 const listingParams = computed(() => {
@@ -50,8 +50,11 @@ const listingParams = computed(() => {
     return params;
 })
 
-const download = computed(() => {
-    return cp_url(`utilities/statamic-logger/download/` + state.date)
+const downloadUrl = computed(() => {
+    if (state.date) {
+        return cp_url(`utilities/statamic-logger/download/` + state.date)
+    }
+    return null;
 })
 
 
@@ -59,16 +62,10 @@ const download = computed(() => {
 <template>
     <div id="logger-viewer">
         <header class="mb-6">
-
-            <breadcrumb :title="__('Utilities')" :url="breadcrumbUrl"/>
-
-            <div class="flex items-center">
-                <h1 class="flex-1" v-text="title"/>
-            </div>
-
             <div class="mt-6 sm:flex items-center sm:space-x-3">
                 <div class="flex items-center space-x-3">
                     <div class="w-48">
+                        <span class="sr-only">{{ __('statamic-logger::utility.date') }}</span>
                         <Select
                             v-model="state.date"
                             :options="dateOptions"
@@ -77,32 +74,26 @@ const download = computed(() => {
                     </div>
 
                     <Button
-                        v-if="state.date"
-                        :href="download"
-                        target="_blank">
-                        Download
-                    </Button>
-                    <Button
-                        v-else
-                        :disabled="true"
-                        target="_blank">
-                        Download
+                        :disabled="state.date"
+                        :href="downloadUrl"
+                        target="_blank"
+                        variant="primary">
+                        {{ __('statamic-logger::utility.download') }}
                     </Button>
                 </div>
 
                 <div class="py-2 flex items-center space-x-4">
                     <Checkbox
                         v-model="state.showUserFullDetails"
-                        label="Show full user details?"
+                        :label="__('statamic-logger::utility.options.show_user_full_details')"
                     />
 
                     <Checkbox
                         v-model="state.showRaw"
-                        label="Show raw message?"
+                        :label="__('statamic-logger::utility.options.show_raw')"
                     />
                 </div>
             </div>
-
         </header>
 
         <Listing
