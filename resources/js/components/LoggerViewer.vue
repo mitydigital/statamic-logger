@@ -1,7 +1,6 @@
 <script setup>
 import {Button, Checkbox, Listing, Select} from '@statamic/cms/ui';
 import {computed, reactive, ref} from 'vue';
-import LoggerAvatar from './Avatar.vue';
 
 const props = defineProps({
     breadcrumbUrl: {type: String, required: true},
@@ -63,7 +62,7 @@ const downloadUrl = computed(() => {
     <div id="logger-viewer">
         <header class="mb-6">
             <div class="mt-6 sm:flex items-center sm:space-x-3">
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-3 me-3">
                     <div class="w-48">
                         <span class="sr-only">{{ __('statamic-logger::utility.date') }}</span>
                         <Select
@@ -114,7 +113,7 @@ const downloadUrl = computed(() => {
 
             <template #cell-user="{ row }">
                 <div class="flex gap-x-2">
-                    <LoggerAvatar :user="row.user" class="size-8"></LoggerAvatar>
+                    <ui-avatar :user="row.user" class="size-8"></ui-avatar>
                     <div v-if="state.showUserFullDetails" style="margin-top:-1px;">
                         <div class="leading-tight">{{ row.user.name }}</div>
                         <div class="text-2xs text-gray-500">{{ row.user.id }}</div>
