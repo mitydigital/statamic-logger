@@ -18,8 +18,6 @@ class TwoFactor extends EventListener
 
     protected function data($event): array
     {
-        ray($event);
-
         if (is_null($event->user)) {
             return [
                 'id' => null,
