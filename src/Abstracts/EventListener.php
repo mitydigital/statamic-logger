@@ -2,13 +2,12 @@
 
 namespace MityDigital\StatamicLogger\Abstracts;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Log;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use UnhandledMatchError;
 
-abstract class EventListener implements ShouldQueue
+abstract class EventListener
 {
     protected string $actionEvent;
 
