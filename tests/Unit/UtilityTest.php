@@ -64,10 +64,10 @@ it('has defined the correct utility routes', function () {
 
 it('has a permission added', function () {
     // boot permissions
-    \Statamic\Facades\Permission::boot();
+    Statamic\Facades\Permission::boot();
 
     // find the permission
-    $permission = \Statamic\Facades\Permission::all()
+    $permission = Statamic\Facades\Permission::all()
         ->filter(fn (Permission $permission) => $permission->value() === 'access statamic-logger utility')
         ->first();
 

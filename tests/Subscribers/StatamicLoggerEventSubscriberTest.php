@@ -9,6 +9,7 @@ use Illuminate\Events\Dispatcher;
 use MityDigital\StatamicLogger\Abstracts\EventListener;
 use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use MityDigital\StatamicLogger\Listeners\Entry;
+use MityDigital\StatamicLogger\Listeners\Submission;
 use MityDigital\StatamicLogger\Subscribers\StatamicLoggerEventSubscriber;
 use Statamic\Events\AddonSettingsSaved;
 use Statamic\Events\AssetContainerCreated;
@@ -17,6 +18,7 @@ use Statamic\Events\AssetContainerSaved;
 use Statamic\Events\AssetDeleted;
 use Statamic\Events\AssetFolderDeleted;
 use Statamic\Events\AssetFolderSaved;
+use Statamic\Events\AssetReferencesUpdated;
 use Statamic\Events\AssetReplaced;
 use Statamic\Events\AssetReuploaded;
 use Statamic\Events\AssetSaved;
@@ -30,15 +32,20 @@ use Statamic\Events\CollectionDeleted;
 use Statamic\Events\CollectionSaved;
 use Statamic\Events\CollectionTreeDeleted;
 use Statamic\Events\CollectionTreeSaved;
+use Statamic\Events\DefaultPreferencesSaved;
+use Statamic\Events\DuplicateIdRegenerated;
 use Statamic\Events\EntryCreated;
 use Statamic\Events\EntryDeleted;
 use Statamic\Events\EntrySaved;
+use Statamic\Events\EntryScheduleReached;
 use Statamic\Events\FieldsetCreated;
 use Statamic\Events\FieldsetDeleted;
+use Statamic\Events\FieldsetReset;
 use Statamic\Events\FieldsetSaved;
 use Statamic\Events\FormCreated;
 use Statamic\Events\FormDeleted;
 use Statamic\Events\FormSaved;
+use Statamic\Events\FormSubmitted;
 use Statamic\Events\GlideCacheCleared;
 use Statamic\Events\GlobalSetCreated;
 use Statamic\Events\GlobalSetDeleted;
@@ -73,6 +80,7 @@ use Statamic\Events\StaticCacheCleared;
 use Statamic\Events\SubmissionCreated;
 use Statamic\Events\SubmissionCreating;
 use Statamic\Events\SubmissionDeleted;
+use Statamic\Events\SubmissionFinalized;
 use Statamic\Events\SubmissionSaved;
 use Statamic\Events\SubmissionSaving;
 use Statamic\Events\TaxonomyCreated;
@@ -80,6 +88,7 @@ use Statamic\Events\TaxonomyDeleted;
 use Statamic\Events\TaxonomySaved;
 use Statamic\Events\TermCreated;
 use Statamic\Events\TermDeleted;
+use Statamic\Events\TermReferencesUpdated;
 use Statamic\Events\TermSaved;
 use Statamic\Events\TwoFactorAuthenticationChallenged;
 use Statamic\Events\TwoFactorAuthenticationDisabled;
@@ -91,7 +100,9 @@ use Statamic\Events\UserDeleted;
 use Statamic\Events\UserGroupDeleted;
 use Statamic\Events\UserGroupSaved;
 use Statamic\Events\UserPasswordChanged;
+use Statamic\Events\UserRegistered;
 use Statamic\Events\UserSaved;
+use Statamic\Events\ValidTwoFactorAuthenticationCodeProvided;
 
 beforeEach(function () {
     $this->events = [
@@ -102,6 +113,7 @@ beforeEach(function () {
         AssetContainerSaved::class,
 
         AssetDeleted::class,
+        AssetReferencesUpdated::class,
         AssetReplaced::class,
         AssetReuploaded::class,
         AssetSaved::class,
@@ -127,12 +139,18 @@ beforeEach(function () {
         CollectionTreeDeleted::class,
         CollectionTreeSaved::class,
 
+        DefaultPreferencesSaved::class,
+
+        DuplicateIdRegenerated::class,
+
         EntryCreated::class,
         EntryDeleted::class,
         EntrySaved::class,
+        EntryScheduleReached::class,
 
         FieldsetCreated::class,
         FieldsetDeleted::class,
+        FieldsetReset::class,
         FieldsetSaved::class,
 
         FormCreated::class,
@@ -187,6 +205,7 @@ beforeEach(function () {
         SubmissionCreated::class,
         SubmissionCreating::class,
         SubmissionDeleted::class,
+        SubmissionFinalized::class,
         SubmissionSaved::class,
         SubmissionSaving::class,
 
@@ -196,6 +215,7 @@ beforeEach(function () {
 
         TermCreated::class,
         TermDeleted::class,
+        TermReferencesUpdated::class,
         TermSaved::class,
 
         TwoFactorAuthenticationChallenged::class,
@@ -203,9 +223,11 @@ beforeEach(function () {
         TwoFactorAuthenticationEnabled::class,
         TwoFactorAuthenticationFailed::class,
         TwoFactorRecoveryCodeReplaced::class,
+        ValidTwoFactorAuthenticationCodeProvided::class,
 
         UserCreated::class,
         UserDeleted::class,
+        UserRegistered::class,
         UserSaved::class,
 
         UserPasswordChanged::class,
@@ -257,6 +279,18 @@ it('can add additional events', function () {
     $subscriber = new StatamicLoggerEventSubscriber;
     expect($subscriber->subscribe(new Dispatcher))
         ->toHaveKey(Verified::class);
+});
+
+it('only subscribes to form submitted when opted in', function () {
+    $subscriber = new StatamicLoggerEventSubscriber;
+
+    expect($subscriber->subscribe(new Dispatcher))
+        ->not()->toHaveKey(FormSubmitted::class);
+
+    StatamicLogger::subscribe(FormSubmitted::class, Submission::class);
+
+    expect($subscriber->subscribe(new Dispatcher)[FormSubmitted::class])
+        ->toBe(Submission::class);
 });
 
 it('can override existing events', function () {

@@ -41,6 +41,7 @@ use Statamic\Events\AssetContainerSaved;
 use Statamic\Events\AssetDeleted;
 use Statamic\Events\AssetFolderDeleted;
 use Statamic\Events\AssetFolderSaved;
+use Statamic\Events\AssetReferencesUpdated;
 use Statamic\Events\AssetReplaced;
 use Statamic\Events\AssetReuploaded;
 use Statamic\Events\AssetSaved;
@@ -54,11 +55,15 @@ use Statamic\Events\CollectionDeleted;
 use Statamic\Events\CollectionSaved;
 use Statamic\Events\CollectionTreeDeleted;
 use Statamic\Events\CollectionTreeSaved;
+use Statamic\Events\DefaultPreferencesSaved;
+use Statamic\Events\DuplicateIdRegenerated;
 use Statamic\Events\EntryCreated;
 use Statamic\Events\EntryDeleted;
 use Statamic\Events\EntrySaved;
+use Statamic\Events\EntryScheduleReached;
 use Statamic\Events\FieldsetCreated;
 use Statamic\Events\FieldsetDeleted;
+use Statamic\Events\FieldsetReset;
 use Statamic\Events\FieldsetSaved;
 use Statamic\Events\FormCreated;
 use Statamic\Events\FormDeleted;
@@ -97,6 +102,7 @@ use Statamic\Events\StaticCacheCleared;
 use Statamic\Events\SubmissionCreated;
 use Statamic\Events\SubmissionCreating;
 use Statamic\Events\SubmissionDeleted;
+use Statamic\Events\SubmissionFinalized;
 use Statamic\Events\SubmissionSaved;
 use Statamic\Events\SubmissionSaving;
 use Statamic\Events\TaxonomyCreated;
@@ -104,6 +110,7 @@ use Statamic\Events\TaxonomyDeleted;
 use Statamic\Events\TaxonomySaved;
 use Statamic\Events\TermCreated;
 use Statamic\Events\TermDeleted;
+use Statamic\Events\TermReferencesUpdated;
 use Statamic\Events\TermSaved;
 use Statamic\Events\TwoFactorAuthenticationChallenged;
 use Statamic\Events\TwoFactorAuthenticationDisabled;
@@ -115,7 +122,9 @@ use Statamic\Events\UserDeleted;
 use Statamic\Events\UserGroupDeleted;
 use Statamic\Events\UserGroupSaved;
 use Statamic\Events\UserPasswordChanged;
+use Statamic\Events\UserRegistered;
 use Statamic\Events\UserSaved;
+use Statamic\Events\ValidTwoFactorAuthenticationCodeProvided;
 
 class StatamicLoggerEventSubscriber
 {
@@ -135,6 +144,7 @@ class StatamicLoggerEventSubscriber
             AssetContainerSaved::class => AssetContainer::class,
 
             AssetDeleted::class => Asset::class,
+            AssetReferencesUpdated::class => Asset::class,
             AssetReplaced::class => Asset::class,
             AssetReuploaded::class => Asset::class,
             AssetSaved::class => Asset::class,
@@ -160,12 +170,18 @@ class StatamicLoggerEventSubscriber
             CollectionTreeDeleted::class => CollectionTree::class,
             CollectionTreeSaved::class => CollectionTree::class,
 
+            DefaultPreferencesSaved::class => Utility::class,
+
+            DuplicateIdRegenerated::class => Utility::class,
+
             EntryCreated::class => Entry::class,
             EntryDeleted::class => Entry::class,
             EntrySaved::class => Entry::class,
+            EntryScheduleReached::class => Entry::class,
 
             FieldsetCreated::class => Fieldset::class,
             FieldsetDeleted::class => Fieldset::class,
+            FieldsetReset::class => Fieldset::class,
             FieldsetSaved::class => Fieldset::class,
 
             FormCreated::class => Form::class,
@@ -215,6 +231,7 @@ class StatamicLoggerEventSubscriber
             SubmissionCreated::class => Submission::class,
             SubmissionCreating::class => Submission::class,
             SubmissionDeleted::class => Submission::class,
+            SubmissionFinalized::class => Submission::class,
             SubmissionSaved::class => Submission::class,
             SubmissionSaving::class => Submission::class,
 
@@ -229,6 +246,7 @@ class StatamicLoggerEventSubscriber
 
             TermCreated::class => Term::class,
             TermDeleted::class => Term::class,
+            TermReferencesUpdated::class => Term::class,
             TermSaved::class => Term::class,
 
             TwoFactorAuthenticationChallenged::class => TwoFactor::class,
@@ -236,9 +254,11 @@ class StatamicLoggerEventSubscriber
             TwoFactorAuthenticationEnabled::class => TwoFactor::class,
             TwoFactorAuthenticationFailed::class => TwoFactor::class,
             TwoFactorRecoveryCodeReplaced::class => TwoFactor::class,
+            ValidTwoFactorAuthenticationCodeProvided::class => TwoFactor::class,
 
             UserCreated::class => User::class,
             UserDeleted::class => User::class,
+            UserRegistered::class => User::class,
             UserSaved::class => User::class,
 
             UserPasswordChanged::class => User::class,

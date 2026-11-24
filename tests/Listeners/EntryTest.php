@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Event;
 use MityDigital\StatamicLogger\Listeners\Entry;
 use Statamic\Entries\Collection;
 use Statamic\Events\EntrySaved;
+use Statamic\Events\EntryScheduleReached;
 
 it('returns the correct entry data structure', function () {
     // disable actual events
@@ -17,7 +18,7 @@ it('returns the correct entry data structure', function () {
         ->sites(['default'])
         ->save();
 
-    $entry = \Statamic\Facades\Entry::make()
+    $entry = Statamic\Facades\Entry::make()
         ->collection($collection)
         ->slug('entry')
         ->data([])
@@ -50,6 +51,37 @@ it('returns the correct entry data structure', function () {
         // site
         ->and($data)->toHaveKey('site')
         ->and($data['site'])->toBe('default');
+});
+
+it('logs an entry schedule being reached', function () {
+    // disable actual events
+    Event::fake();
+
+    // create supporting components
+    $collection = (new Collection)
+        ->title('Blog Posts')
+        ->handle('blog')
+        ->sites(['default'])
+        ->save();
+
+    $entry = Statamic\Facades\Entry::make()
+        ->collection($collection)
+        ->slug('entry')
+        ->data(['title' => 'My Entry']);
+    $entry->save();
+
+    $event = new EntryScheduleReached($entry);
+
+    expect(getEventHandlerData(new Entry, $event))->toBe([
+        'id' => $entry->id(),
+        'name' => 'My Entry',
+        'collection' => [
+            'id' => 'blog',
+            'name' => 'Blog Posts',
+        ],
+        'site' => 'default',
+    ])
+        ->and(renderLoggedEvent(new Entry, $event))->toContain("Reached schedule for 'My Entry' in the 'Blog Posts' Collection");
 });
 
 it('returns the correct view', function () {

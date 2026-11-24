@@ -9,7 +9,7 @@ it('returns the correct form data structure', function () {
     Event::fake();
 
     // create supporting components
-    $form = (\Statamic\Facades\Form::make('contact'))
+    $form = (Statamic\Facades\Form::make('contact'))
         ->title('Contact');
     $form->save();
 

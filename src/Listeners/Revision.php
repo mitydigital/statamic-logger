@@ -5,6 +5,7 @@ namespace MityDigital\StatamicLogger\Listeners;
 use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\RevisionDeleted;
 use Statamic\Events\RevisionSaved;
+use Statamic\Facades\Entry;
 
 class Revision extends EventListener
 {
@@ -15,7 +16,7 @@ class Revision extends EventListener
 
     protected function data($event): array
     {
-        $entry = \Statamic\Facades\Entry::find($event->revision->attribute('id'));
+        $entry = Entry::find($event->revision->attribute('id'));
 
         return [
             'id' => $event->revision->id(),

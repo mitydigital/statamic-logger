@@ -8,6 +8,7 @@ use Statamic\Events\TwoFactorAuthenticationDisabled;
 use Statamic\Events\TwoFactorAuthenticationEnabled;
 use Statamic\Events\TwoFactorAuthenticationFailed;
 use Statamic\Events\TwoFactorRecoveryCodeReplaced;
+use Statamic\Events\ValidTwoFactorAuthenticationCodeProvided;
 
 class TwoFactor extends EventListener
 {
@@ -46,6 +47,7 @@ class TwoFactor extends EventListener
             TwoFactorAuthenticationEnabled::class => 'enabled',
             TwoFactorAuthenticationFailed::class => 'failed',
             TwoFactorRecoveryCodeReplaced::class => 'recovery_code_replaced',
+            ValidTwoFactorAuthenticationCodeProvided::class => 'passed',
         };
     }
 }

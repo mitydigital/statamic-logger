@@ -10,6 +10,7 @@ use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\UserCreated;
 use Statamic\Events\UserDeleted;
 use Statamic\Events\UserPasswordChanged;
+use Statamic\Events\UserRegistered;
 use Statamic\Events\UserSaved;
 
 class User extends EventListener
@@ -51,6 +52,7 @@ class User extends EventListener
 
             UserCreated::class => __('statamic-logger::verbs.created'),
             UserDeleted::class => __('statamic-logger::verbs.deleted'),
+            UserRegistered::class => __('statamic-logger::verbs.registered'),
             UserSaved::class => __('statamic-logger::verbs.saved'),
 
             UserPasswordChanged::class => __('statamic-logger::verbs.password_changed'),

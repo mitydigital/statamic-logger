@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Event;
 use MityDigital\StatamicLogger\Listeners\User;
+use Statamic\Events\UserRegistered;
 use Statamic\Events\UserSaved;
 
 it('returns the correct user data structure', function () {
@@ -9,7 +11,7 @@ it('returns the correct user data structure', function () {
     Event::fake();
 
     // create supporting components
-    $user = \Statamic\Facades\User::make()
+    $user = Statamic\Facades\User::make()
         ->makeSuper()
         ->set('name', 'Peter Parker')
         ->email('peter.parker@spiderman.com')
@@ -31,6 +33,43 @@ it('returns the correct user data structure', function () {
         // name
         ->and($data)->toHaveKey('name')
         ->and($data['name'])->toBe($user->name());
+});
+
+it('logs a user registering', function () {
+    // disable actual events
+    Event::fake();
+
+    // create supporting components
+    $user = Statamic\Facades\User::make()
+        ->makeSuper()
+        ->set('name', 'Peter Parker')
+        ->email('peter.parker@spiderman.com')
+        ->set('password', 'secret')
+        ->save();
+
+    $event = new UserRegistered($user);
+
+    expect(getEventHandlerData(new User, $event))->toBe([
+        'id' => $user->id(),
+        'name' => 'Peter Parker',
+    ])
+        ->and(renderLoggedEvent(new User, $event))->toContain('Peter Parker registered');
+});
+
+it('logs a completed password reset', function () {
+    // disable actual events
+    Event::fake();
+
+    // create supporting components
+    $user = Statamic\Facades\User::make()
+        ->makeSuper()
+        ->set('name', 'Peter Parker')
+        ->email('peter.parker@spiderman.com')
+        ->set('password', 'secret')
+        ->save();
+
+    expect(renderLoggedEvent(new User, new PasswordReset($user)))
+        ->toContain('Peter Parker reset their password');
 });
 
 it('returns the correct view', function () {

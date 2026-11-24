@@ -4,6 +4,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use MityDigital\StatamicLogger\Listeners\Asset;
 use Statamic\Assets\AssetContainer;
+use Statamic\Events\AssetReferencesUpdated;
 use Statamic\Events\AssetReplaced;
 use Statamic\Events\AssetSaved;
 
@@ -99,6 +100,33 @@ it('returns the original asset when an asset is replaced', function (bool $delet
     'original is kept' => false,
     'original is deleted' => true,
 ]);
+
+it('logs asset references being updated', function () {
+    // disable actual events
+    Event::fake();
+
+    // supporting components
+    $assetContainer = (new AssetContainer)
+        ->title('Test Container')
+        ->handle('test_container')
+        ->disk('assets')
+        ->save();
+
+    $assetContainer->disk()->put('mity.png', file_get_contents(__DIR__.'/../__fixtures__/assets/mity.png'));
+    $asset = $assetContainer->makeAsset('mity.png');
+
+    $event = new AssetReferencesUpdated($asset);
+
+    expect(getEventHandlerData(new Asset, $event))->toBe([
+        'id' => 'test_container::mity.png',
+        'name' => 'mity.png',
+        'container' => [
+            'id' => 'test_container',
+            'name' => 'Test Container',
+        ],
+    ])
+        ->and(renderLoggedEvent(new Asset, $event))->toContain("Updated references to 'mity.png' in the 'Test Container' Container");
+});
 
 it('returns the correct view', function () {
     $listener = new Asset;

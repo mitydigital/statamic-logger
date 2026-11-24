@@ -3,6 +3,8 @@
 namespace MityDigital\StatamicLogger\Listeners;
 
 use MityDigital\StatamicLogger\Abstracts\EventListener;
+use Statamic\Events\DefaultPreferencesSaved;
+use Statamic\Events\DuplicateIdRegenerated;
 use Statamic\Events\GlideCacheCleared;
 use Statamic\Events\LicenseSet;
 use Statamic\Events\LicensesRefreshed;
@@ -23,6 +25,8 @@ class Utility extends EventListener
     {
         return [
             'utility' => match (get_class($event)) {
+                DefaultPreferencesSaved::class => __('statamic-logger::utilities.preferences'),
+                DuplicateIdRegenerated::class => __('statamic-logger::utilities.duplicate_id'),
                 GlideCacheCleared::class => __('statamic-logger::utilities.glide'),
                 LicenseSet::class => __('statamic-logger::utilities.license'),
                 LicensesRefreshed::class => Str::plural(__('statamic-logger::utilities.license')),
@@ -36,6 +40,8 @@ class Utility extends EventListener
     protected function verb($event): string
     {
         return match ($event) {
+            DefaultPreferencesSaved::class => __('statamic-logger::verbs.saved'),
+            DuplicateIdRegenerated::class => __('statamic-logger::verbs.regenerated'),
             GlideCacheCleared::class, StacheCleared::class, StaticCacheCleared::class => __('statamic-logger::verbs.cleared'),
             LicenseSet::class => __('statamic-logger::verbs.set'),
             LicensesRefreshed::class => __('statamic-logger::verbs.refreshed'),

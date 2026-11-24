@@ -16,7 +16,7 @@ it('returns the correct blueprint data structure', function () {
         ->save();
 
     // create a blueprint
-    $blueprint = (new \Statamic\Fields\Blueprint)
+    $blueprint = (new Statamic\Fields\Blueprint)
         ->setHandle('blog')
         ->setNamespace('collections.blog')
         ->setContents([

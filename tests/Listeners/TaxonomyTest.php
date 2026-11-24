@@ -9,7 +9,7 @@ it('returns the correct taxonomy data structure', function () {
     Event::fake();
 
     // create supporting components
-    $taxonomy = \Statamic\Facades\Taxonomy::make()
+    $taxonomy = Statamic\Facades\Taxonomy::make()
         ->title('My Taxonomy')
         ->handle('my_taxonomy');
     $taxonomy->save();

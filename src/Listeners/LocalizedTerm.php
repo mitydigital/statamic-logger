@@ -5,6 +5,7 @@ namespace MityDigital\StatamicLogger\Listeners;
 use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\LocalizedTermDeleted;
 use Statamic\Events\LocalizedTermSaved;
+use Statamic\Facades\Site;
 
 class LocalizedTerm extends EventListener
 {
@@ -15,7 +16,7 @@ class LocalizedTerm extends EventListener
 
     protected function data($event): array
     {
-        $site = \Statamic\Facades\Site::get($event->term->locale());
+        $site = Site::get($event->term->locale());
 
         return [
             'id' => $event->term->id(),

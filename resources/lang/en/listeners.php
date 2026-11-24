@@ -27,7 +27,15 @@ return [
 
     'revision' => ":action revision ':id' for ':entry_name' (:entry_id) in ':collection_name' for the ':site' Site",
 
+    'status' => 'Status',
+
     'submission' => ":action submission for form ':form'",
+
+    'submission_status' => [
+        'finalized' => 'Finalized',
+        'partial' => 'Partial',
+        'spam' => 'Spam',
+    ],
 
     'term' => ":action ':name' in the ':taxonomy_name' Taxonomy",
 
@@ -36,6 +44,7 @@ return [
         'disabled' => ':user disabled Two Factor Authentication',
         'enabled' => ':user enabled Two Factor Authentication',
         'failed' => ':user failed a Two Factor challenge',
+        'passed' => ':user passed a Two Factor challenge',
         'recovery_code_replaced' => ':user has had a recovery code replaced',
     ],
 ];

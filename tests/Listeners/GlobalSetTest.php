@@ -9,7 +9,7 @@ it('returns the correct form data structure', function () {
     Event::fake();
 
     // create supporting components
-    $globalSet = (\Statamic\Facades\GlobalSet::make('settings'))
+    $globalSet = (Statamic\Facades\GlobalSet::make('settings'))
         ->title('Settings');
     $globalSet->save();
 

@@ -9,7 +9,7 @@ it('returns the correct collection data structure', function () {
     Event::fake();
 
     // create supporting components
-    $collection = (new \Statamic\Entries\Collection)
+    $collection = (new Statamic\Entries\Collection)
         ->title('Blog Posts')
         ->handle('blog')
         ->sites(['default'])
