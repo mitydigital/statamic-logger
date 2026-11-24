@@ -18,12 +18,15 @@ class Asset extends EventListener
 
     protected function data($event): array
     {
+        // AssetReplaced has no "asset": it has the original and new assets instead
+        $asset = $event instanceof AssetReplaced ? $event->originalAsset : $event->asset;
+
         return [
-            'id' => $event->asset->id,
-            'name' => $event->asset->title,
+            'id' => $asset->id,
+            'name' => $asset->title,
             'container' => [
-                'id' => $event->asset->container->id,
-                'name' => $event->asset->container->title,
+                'id' => $asset->container->id,
+                'name' => $asset->container->title,
             ],
         ];
     }
