@@ -11,6 +11,7 @@
 |
 */
 
+use MityDigital\StatamicLogger\Http\Resources\LogResource;
 use MityDigital\StatamicLogger\Tests\TestCase;
 
 uses(TestCase::class)->in('.');
@@ -43,6 +44,14 @@ function getEventHandlerData($handler, $event): array
     $method = $reflector->getMethod('data');
 
     return $method->invokeArgs($handler, [$event]);
+}
+
+function renderLoggedEvent($handler, $event): string
+{
+    $entry = callProtectedMethod($handler, 'buildLogEntry', [$event]);
+    $line = '[2026-11-25 09:00:00] testing.INFO: '.json_encode($entry);
+
+    return html_entity_decode((new LogResource($line))->toArray(request())['detail'], ENT_QUOTES);
 }
 
 function callProtectedMethod($object, $method, $args = []): mixed

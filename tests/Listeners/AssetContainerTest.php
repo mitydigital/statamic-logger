@@ -9,7 +9,7 @@ it('returns the correct asset container data structure', function () {
     Event::fake();
 
     // create supporting components
-    $assetContainer = (new \Statamic\Assets\AssetContainer)
+    $assetContainer = (new Statamic\Assets\AssetContainer)
         ->title('Test Container')
         ->handle('test_container')
         ->disk('assets')

@@ -9,7 +9,7 @@ it('returns the correct user group data structure', function () {
     Event::fake();
 
     // create supporting components
-    $userGroup = \Statamic\Facades\UserGroup::make()
+    $userGroup = Statamic\Facades\UserGroup::make()
         ->title('My User Group')
         ->data([])
         ->handle('my_user_group');

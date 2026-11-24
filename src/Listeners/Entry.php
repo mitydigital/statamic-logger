@@ -6,6 +6,7 @@ use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\EntryCreated;
 use Statamic\Events\EntryDeleted;
 use Statamic\Events\EntrySaved;
+use Statamic\Events\EntryScheduleReached;
 
 class Entry extends EventListener
 {
@@ -32,7 +33,8 @@ class Entry extends EventListener
         return match ($event) {
             EntryCreated::class => __('statamic-logger::verbs.created'),
             EntryDeleted::class => __('statamic-logger::verbs.deleted'),
-            EntrySaved::class => __('statamic-logger::verbs.saved')
+            EntrySaved::class => __('statamic-logger::verbs.saved'),
+            EntryScheduleReached::class => __('statamic-logger::verbs.schedule_reached')
         };
     }
 }

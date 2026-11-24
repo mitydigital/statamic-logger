@@ -9,7 +9,7 @@ it('returns the correct user data structure', function () {
     Event::fake();
 
     // create supporting components
-    $site = \Statamic\Facades\Site::current();
+    $site = Statamic\Facades\Site::current();
 
     // create the event
     $event = new SiteSaved($site);

@@ -9,7 +9,7 @@ it('returns the correct role data structure', function () {
     Event::fake();
 
     // create supporting components
-    $role = \Statamic\Facades\Role::make()
+    $role = Statamic\Facades\Role::make()
         ->title('My User Role')
         ->handle('my_user_role');
     $role->save();

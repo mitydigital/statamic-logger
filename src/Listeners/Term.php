@@ -5,6 +5,7 @@ namespace MityDigital\StatamicLogger\Listeners;
 use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\TermCreated;
 use Statamic\Events\TermDeleted;
+use Statamic\Events\TermReferencesUpdated;
 use Statamic\Events\TermSaved;
 
 class Term extends EventListener
@@ -31,6 +32,7 @@ class Term extends EventListener
         return match ($event) {
             TermCreated::class => __('statamic-logger::verbs.created'),
             TermDeleted::class => __('statamic-logger::verbs.deleted'),
+            TermReferencesUpdated::class => __('statamic-logger::verbs.references_updated'),
             TermSaved::class => __('statamic-logger::verbs.saved')
         };
     }

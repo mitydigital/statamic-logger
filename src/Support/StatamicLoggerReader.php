@@ -4,6 +4,7 @@ namespace MityDigital\StatamicLogger\Support;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use MityDigital\StatamicLogger\Facades\StatamicLogger;
 use SplFileObject;
 
 class StatamicLoggerReader
@@ -20,8 +21,8 @@ class StatamicLoggerReader
     {
         $logs = collect();
 
-        $path = storage_path(\MityDigital\StatamicLogger\Facades\StatamicLogger::getStoragePath());
-        $filename = \MityDigital\StatamicLogger\Facades\StatamicLogger::getStorageFilename();
+        $path = storage_path(StatamicLogger::getStoragePath());
+        $filename = StatamicLogger::getStorageFilename();
 
         // get items
         $items = glob($path.DIRECTORY_SEPARATOR.$filename.'-*.log');
@@ -82,8 +83,8 @@ class StatamicLoggerReader
     protected function read(string $date): bool
     {
         // get the configured path and filename
-        $path = \MityDigital\StatamicLogger\Facades\StatamicLogger::getStoragePath();
-        $filename = \MityDigital\StatamicLogger\Facades\StatamicLogger::getStorageFilename();
+        $path = StatamicLogger::getStoragePath();
+        $filename = StatamicLogger::getStorageFilename();
 
         // build the path
         $fullPath = storage_path($path.DIRECTORY_SEPARATOR.$filename.'-'.$date.'.log');

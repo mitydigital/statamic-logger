@@ -5,6 +5,7 @@ namespace MityDigital\StatamicLogger\Listeners;
 use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\FieldsetCreated;
 use Statamic\Events\FieldsetDeleted;
+use Statamic\Events\FieldsetReset;
 use Statamic\Events\FieldsetSaved;
 
 class Fieldset extends EventListener
@@ -27,6 +28,7 @@ class Fieldset extends EventListener
         return match ($event) {
             FieldsetCreated::class => __('statamic-logger::verbs.created'),
             FieldsetDeleted::class => __('statamic-logger::verbs.deleted'),
+            FieldsetReset::class => __('statamic-logger::verbs.reset'),
             FieldsetSaved::class => __('statamic-logger::verbs.saved')
         };
     }

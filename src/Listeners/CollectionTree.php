@@ -5,6 +5,7 @@ namespace MityDigital\StatamicLogger\Listeners;
 use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\CollectionTreeDeleted;
 use Statamic\Events\CollectionTreeSaved;
+use Statamic\Facades\Collection;
 
 class CollectionTree extends EventListener
 {
@@ -17,7 +18,7 @@ class CollectionTree extends EventListener
     {
         return [
             'id' => $event->tree->handle(),
-            'name' => \Statamic\Facades\Collection::find($event->tree->handle())->title(),
+            'name' => Collection::find($event->tree->handle())->title(),
             'site' => $event->tree->site()->handle(),
         ];
     }

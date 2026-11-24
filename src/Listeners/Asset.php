@@ -4,6 +4,7 @@ namespace MityDigital\StatamicLogger\Listeners;
 
 use MityDigital\StatamicLogger\Abstracts\EventListener;
 use Statamic\Events\AssetDeleted;
+use Statamic\Events\AssetReferencesUpdated;
 use Statamic\Events\AssetReplaced;
 use Statamic\Events\AssetReuploaded;
 use Statamic\Events\AssetSaved;
@@ -35,6 +36,7 @@ class Asset extends EventListener
     {
         return match ($event) {
             AssetDeleted::class => __('statamic-logger::verbs.deleted'),
+            AssetReferencesUpdated::class => __('statamic-logger::verbs.references_updated'),
             AssetSaved::class => __('statamic-logger::verbs.saved'),
             AssetReplaced::class => __('statamic-logger::verbs.replaced'),
             AssetReuploaded::class => __('statamic-logger::verbs.reuploaded'),

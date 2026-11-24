@@ -9,7 +9,7 @@ it('returns the correct nav data structure', function () {
     Event::fake();
 
     // create supporting components
-    $nav = \Statamic\Facades\Nav::make()
+    $nav = Statamic\Facades\Nav::make()
         ->title('My User Role')
         ->handle('my_user_role');
     $nav->save();
